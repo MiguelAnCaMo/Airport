@@ -16,7 +16,7 @@ public class AirplaneController {
     
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     public AirplaneController(String a) throws IOException {
-       planes = readPlanes("C:\\Users\\migue\\Downloads\\Airport\\json\\planes.json");
+       planes = readPlanes("json/planes.json");
     }
     
     public AirplaneController() {

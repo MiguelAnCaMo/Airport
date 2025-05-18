@@ -16,7 +16,7 @@ public class PassengerController {
     private static ArrayList <Passenger> passengers = new ArrayList<>();
 
     public PassengerController(String a) throws IOException {
-        passengers = readPassengers("C:\\Users\\migue\\Downloads\\Airport\\json\\passengers.json");
+        passengers = readPassengers("json/passengers.json");
     }
     
     public PassengerController() {

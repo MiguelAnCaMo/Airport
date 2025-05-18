@@ -17,7 +17,7 @@ public class LocationController {
    
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     public LocationController(String a) throws IOException {
-        locations = readLocations("C:\\Users\\migue\\Downloads\\Airport\\json\\locations.json");
+        locations = readLocations("json/locations.json");
     }
     
     public LocationController() {
