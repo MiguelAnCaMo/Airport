@@ -3,7 +3,7 @@ package view;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import controller.PassengerController;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -111,7 +111,7 @@ public class AirportFrame extends javax.swing.JFrame {
         passengerRegistrationFirstName = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         passengerRegistrationComboBoxDay = new javax.swing.JComboBox<>();
-        jButton8 = new javax.swing.JButton();
+        passengerRegistrationRegisterButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         airplaneRegistrationID = new javax.swing.JTextField();
@@ -123,7 +123,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         airplaneRegistrationAirline = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        airplaneRegistrationCreate = new javax.swing.JButton();
+        airplaneRegistrationCreateButton = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         locationRegistrationID = new javax.swing.JTextField();
@@ -137,7 +137,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         locationRegistrationLongitude = new javax.swing.JTextField();
-        locationRegistrationBotonCreate = new javax.swing.JButton();
+        locationRegistrationCreateButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         flightRegistrationID = new javax.swing.JTextField();
@@ -373,14 +373,14 @@ public class AirportFrame extends javax.swing.JFrame {
         passengerRegistrationComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day" }));
         jPanel2.add(passengerRegistrationComboBoxDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
 
-        jButton8.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jButton8.setText("Register");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        passengerRegistrationRegisterButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        passengerRegistrationRegisterButton.setText("Register");
+        passengerRegistrationRegisterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                passengerRegistrationRegisterButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, -1, -1));
+        jPanel2.add(passengerRegistrationRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, -1, -1));
 
         paneOpciones.addTab("Passenger registration", jPanel2);
 
@@ -431,15 +431,15 @@ public class AirportFrame extends javax.swing.JFrame {
         jPanel3.add(jLabel15);
         jLabel15.setBounds(53, 336, 70, 25);
 
-        airplaneRegistrationCreate.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        airplaneRegistrationCreate.setText("Create");
-        airplaneRegistrationCreate.addActionListener(new java.awt.event.ActionListener() {
+        airplaneRegistrationCreateButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        airplaneRegistrationCreateButton.setText("Create");
+        airplaneRegistrationCreateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                airplaneRegistrationCreateActionPerformed(evt);
+                airplaneRegistrationCreateButtonActionPerformed(evt);
             }
         });
-        jPanel3.add(airplaneRegistrationCreate);
-        airplaneRegistrationCreate.setBounds(490, 480, 120, 40);
+        jPanel3.add(airplaneRegistrationCreateButton);
+        airplaneRegistrationCreateButton.setBounds(490, 480, 120, 40);
 
         paneOpciones.addTab("Airplane registration", jPanel3);
 
@@ -473,11 +473,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
         locationRegistrationLongitude.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
 
-        locationRegistrationBotonCreate.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        locationRegistrationBotonCreate.setText("Create");
-        locationRegistrationBotonCreate.addActionListener(new java.awt.event.ActionListener() {
+        locationRegistrationCreateButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        locationRegistrationCreateButton.setText("Create");
+        locationRegistrationCreateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                locationRegistrationBotonCreateActionPerformed(evt);
+                locationRegistrationCreateButtonActionPerformed(evt);
             }
         });
 
@@ -506,7 +506,7 @@ public class AirportFrame extends javax.swing.JFrame {
                             .addComponent(locationRegistrationLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(515, 515, 515)
-                        .addComponent(locationRegistrationBotonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(locationRegistrationCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(515, 515, 515))
         );
         jPanel13Layout.setVerticalGroup(
@@ -539,7 +539,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(locationRegistrationLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(locationRegistrationBotonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(locationRegistrationCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
@@ -1416,7 +1416,7 @@ public class AirportFrame extends javax.swing.JFrame {
         paneOpciones.setEnabledAt(11, true);
     }//GEN-LAST:event_userSelectActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void passengerRegistrationRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passengerRegistrationRegisterButtonActionPerformed
         // TODO add your handling code here:
         long id = Long.parseLong(passengerRegistrationID.getText());
         String firstname = passengerRegistrationFirstName.getText();
@@ -1427,13 +1427,15 @@ public class AirportFrame extends javax.swing.JFrame {
         int phoneCode = Integer.parseInt(passengerRegistrationContryPhoneNumber.getText());
         long phone = Long.parseLong(passengerRegistrationNumberPhone.getText());
         String country = passengerRegistrationCountry.getText();
-
         LocalDate birthDate = LocalDate.of(year, month, day);
-       
         this.userSelectComboBox.addItem("" + id);
-    }//GEN-LAST:event_jButton8ActionPerformed
+        
+        PassengerController passengerC = new PassengerController();
+        passengerC.createPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
+        
+    }//GEN-LAST:event_passengerRegistrationRegisterButtonActionPerformed
 
-    private void airplaneRegistrationCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneRegistrationCreateActionPerformed
+    private void airplaneRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneRegistrationCreateButtonActionPerformed
         // TODO add your handling code here:
         String id = airplaneRegistrationID.getText();
         String brand = airplaneRegistrationBrand.getText();
@@ -1443,9 +1445,9 @@ public class AirportFrame extends javax.swing.JFrame {
       
 
         this.flightRegistrationComboBoxPlane.addItem(id);
-    }//GEN-LAST:event_airplaneRegistrationCreateActionPerformed
+    }//GEN-LAST:event_airplaneRegistrationCreateButtonActionPerformed
 
-    private void locationRegistrationBotonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationRegistrationBotonCreateActionPerformed
+    private void locationRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationRegistrationCreateButtonActionPerformed
         // TODO add your handling code here:
         String id = locationRegistrationID.getText();
         String name = locationRegistrationName.getText();
@@ -1458,7 +1460,7 @@ public class AirportFrame extends javax.swing.JFrame {
         this.flightRegistrationComboBoxDepartureLocation.addItem(id);
         this.flightRegistrationComboBoxArrivalLocation.addItem(id);
         this.flightRegistrationComboBoxScaleLocation.addItem(id);
-    }//GEN-LAST:event_locationRegistrationBotonCreateActionPerformed
+    }//GEN-LAST:event_locationRegistrationCreateButtonActionPerformed
 
     private void flightRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightRegistrationCreateButtonActionPerformed
         // TODO add your handling code here:
@@ -1527,9 +1529,9 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_showMyFlightsBotonRefreshActionPerformed
 
     private void passangersBotonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passangersBotonRefreshActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTablePassengers.getModel();
-        model.setRowCount(0);
+        PassengerController passengerC = new PassengerController();
+        jTablePassengers.setModel(passengerC.toPassengersJList());
+        
       
     }//GEN-LAST:event_passangersBotonRefreshActionPerformed
 
@@ -1585,7 +1587,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton administratorSelect;
     private javax.swing.JTextField airplaneRegistrationAirline;
     private javax.swing.JTextField airplaneRegistrationBrand;
-    private javax.swing.JButton airplaneRegistrationCreate;
+    private javax.swing.JButton airplaneRegistrationCreateButton;
     private javax.swing.JTextField airplaneRegistrationID;
     private javax.swing.JTextField airplaneRegistrationMaxCapacity;
     private javax.swing.JTextField airplaneRegistrationModel;
@@ -1614,7 +1616,6 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1687,8 +1688,8 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTableLocations;
     private javax.swing.JTable jTablePassengers;
     private javax.swing.JTextField locationRegistrationAirportName;
-    private javax.swing.JButton locationRegistrationBotonCreate;
     private javax.swing.JTextField locationRegistrationContry;
+    private javax.swing.JButton locationRegistrationCreateButton;
     private javax.swing.JTextField locationRegistrationID;
     private javax.swing.JTextField locationRegistrationLatitude;
     private javax.swing.JTextField locationRegistrationLongitude;
@@ -1708,6 +1709,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JTextField passengerRegistrationID;
     private javax.swing.JTextField passengerRegistrationLastName;
     private javax.swing.JTextField passengerRegistrationNumberPhone;
+    private javax.swing.JButton passengerRegistrationRegisterButton;
     private javax.swing.JButton showMyFlightsBotonRefresh;
     private javax.swing.JTextField updateBirthdate;
     private javax.swing.JTextField updateContry;
