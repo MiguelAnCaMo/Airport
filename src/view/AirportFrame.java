@@ -1,6 +1,7 @@
 package view;
 
 import controller.AirplaneController;
+import controller.FlightController;
 import controller.LocationController;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -1470,7 +1471,7 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_locationRegistrationCreateButtonActionPerformed
 
     private void flightRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightRegistrationCreateButtonActionPerformed
-        // TODO add your handling code here:
+        
         String id = flightRegistrationID.getText();
         String planeId = flightRegistrationComboBoxPlane.getItemAt(flightRegistrationComboBoxPlane.getSelectedIndex());
         String departureLocationId = flightRegistrationComboBoxDepartureLocation.getItemAt(flightRegistrationComboBoxDepartureLocation.getSelectedIndex());
@@ -1487,9 +1488,12 @@ public class AirportFrame extends javax.swing.JFrame {
         int minutesDurationsScale = Integer.parseInt(flightRegistrationDurationComboBoxScaleMinute.getItemAt(flightRegistrationDurationComboBoxScaleMinute.getSelectedIndex()));
 
         LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
-
+        
+        FlightController fc = new FlightController();
+        fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
 
         this.addToFlightFlight.addItem(id);
+        
     }//GEN-LAST:event_flightRegistrationCreateButtonActionPerformed
 
     private void botonUpdateUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUpdateUpdateActionPerformed

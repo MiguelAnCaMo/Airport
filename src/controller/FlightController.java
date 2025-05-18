@@ -12,14 +12,18 @@ import model.Flight;
 public class FlightController {
     
     private static ArrayList <Flight> flights = new ArrayList<>();
-    
+    AirplaneController ac = new AirplaneController();
+    LocationController lc = new LocationController();
     
     public FlightController() {
         
     }
-
-    public Flight createFlight(String id, String depAirID, String sAirport, String depDate, String arrDate, String planeID, int numPassergers) {
-        Flight flight = new Flight(); //corregir
+    
+                               //buscara el avión y las ubicaciones por el id para un vuelo
+    public Flight createFlight(String flightID, String planeID, String departureLocationId, String arrivalLocationId, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
+        //mega contructor para la creacion del vuelo 
+        Flight flight = new Flight(flightID, ac.getPlane(Integer.parseInt(flightID)), lc.getLocation(Integer.parseInt(departureLocationId)), lc.getLocation(Integer.parseInt(arrivalLocationId)), departureDate, hoursDurationArrival, minutesDurationArrival); 
+        flights.add(flight);
         return flight;
     }
     

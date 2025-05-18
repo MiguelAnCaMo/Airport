@@ -23,6 +23,10 @@ public class LocationController {
         return location;
     }
     
+    public Location getLocation(int index) {
+        return locations.get(index);
+    }
+    
     public DefaultTableModel toLocationsJList() {
         String[] columnas = {"Airport ID", "Airport Name", "City", "Contry"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
