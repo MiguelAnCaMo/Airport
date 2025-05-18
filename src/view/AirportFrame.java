@@ -1,6 +1,7 @@
 package view;
 
 import controller.AirplaneController;
+import controller.LocationController;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -1452,7 +1453,6 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_airplaneRegistrationCreateButtonActionPerformed
 
     private void locationRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationRegistrationCreateButtonActionPerformed
-        // TODO add your handling code here:
         String id = locationRegistrationID.getText();
         String name = locationRegistrationName.getText();
         String city = locationRegistrationAirportName.getText();
@@ -1464,6 +1464,9 @@ public class AirportFrame extends javax.swing.JFrame {
         this.flightRegistrationComboBoxDepartureLocation.addItem(id);
         this.flightRegistrationComboBoxArrivalLocation.addItem(id);
         this.flightRegistrationComboBoxScaleLocation.addItem(id);
+        
+        LocationController lc = new LocationController();
+        lc.createLocation(id, name, city, country);
     }//GEN-LAST:event_locationRegistrationCreateButtonActionPerformed
 
     private void flightRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightRegistrationCreateButtonActionPerformed
@@ -1554,9 +1557,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void locationsBotonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationsBotonRefreshActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTableLocations.getModel();
-        model.setRowCount(0);
-        
+        LocationController lc = new LocationController();
+        jTableLocations.setModel(lc.toLocationsJList());
     }//GEN-LAST:event_locationsBotonRefreshActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
