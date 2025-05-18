@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import controller.PassengerController;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,9 +22,13 @@ public class AirportFrame extends javax.swing.JFrame {
     private int x, y;
     
 
-    public AirportFrame() {
+    public AirportFrame() throws IOException {
         initComponents();
-
+        //controladores para la carga de datos
+        LocationController lc = new LocationController(null);
+        AirplaneController ac = new AirplaneController(null);
+        PassengerController pc = new PassengerController(null);
+        
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
 

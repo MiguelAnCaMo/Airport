@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import static model.JsonLocation.readLocations;
 import model.Location;
 
 
@@ -9,10 +11,15 @@ import model.Location;
  *
  * @author migue
  */
-public class LocationController {
+public class LocationController { 
     
     private static ArrayList <Location> locations = new ArrayList<>();
-
+   
+    //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
+    public LocationController(String a) throws IOException {
+        locations = readLocations("C:\\Users\\migue\\Downloads\\Airport\\json\\locations.json");
+    }
+    
     public LocationController() {
         
     }

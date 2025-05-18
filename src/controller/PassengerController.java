@@ -1,8 +1,10 @@
 package controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import static model.JsonPassenger.readPassengers;
 import model.Passenger;
 /**
  *
@@ -10,9 +12,13 @@ import model.Passenger;
  */
 public class PassengerController {
     
-    //lista de pasajeros
+    //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     private static ArrayList <Passenger> passengers = new ArrayList<>();
 
+    public PassengerController(String a) throws IOException {
+        passengers = readPassengers("C:\\Users\\migue\\Downloads\\Airport\\json\\passengers.json");
+    }
+    
     public PassengerController() {
         
     }

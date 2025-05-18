@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import static model.JsonPlane.readPlanes;
 import model.Plane;
 
 /**
@@ -12,9 +14,15 @@ public class AirplaneController {
     //lista de aviones
     private static ArrayList <Plane> planes = new ArrayList<>();
     
+    //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
+    public AirplaneController(String a) throws IOException {
+       planes = readPlanes("C:\\Users\\migue\\Downloads\\Airport\\json\\planes.json");
+    }
+    
     public AirplaneController() {
         
     }
+    
     //esto crea un avion
     public Plane createPlane(String id, String brand, String model, int maxCapacity, String Airline) {
         Plane plane = new Plane(id, brand, model, maxCapacity, Airline);
