@@ -39,7 +39,8 @@ public class JsonFlight {
             } else {
                 scaleLocation = lc.getLocationByID(obj.getString("scaleLocation"));
             }
-             
+            
+         
             LocalDateTime departureDate = LocalDateTime.parse(obj.getString("departureDate"));
             int hour1 = obj.getInt("hoursDurationArrival");
             int minutes1 = obj.getInt("minutesDurationArrival");
