@@ -28,6 +28,7 @@ public class AirportFrame extends javax.swing.JFrame {
         LocationController lc = new LocationController(null);
         AirplaneController ac = new AirplaneController(null);
         PassengerController pc = new PassengerController(null);
+        FlightController fc = new FlightController(null);
         
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
@@ -1552,9 +1553,8 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_passangersBotonRefreshActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-        model.setRowCount(0);
+        FlightController fc = new FlightController();
+        jTableFlights.setModel(fc.toFlightsJList());
         
     }//GEN-LAST:event_jButton4ActionPerformed
 

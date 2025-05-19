@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import javax.swing.table.DefaultTableModel;
 import static model.JsonLocation.readLocations;
 import model.Location;
@@ -30,9 +31,15 @@ public class LocationController {
         return location;
     }
     
-    public Location getLocation(int index) {
-        return locations.get(index);
+    public Location getLocationByID(String id) {       
+        for (Location location : locations) {
+            if (location.getAirportId().equals(id)) {
+                return location;
+            }
+        }
+        return new Location("NA", "NA", "NA", "NA", 0, 0);
     }
+    
     
     public DefaultTableModel toLocationsJList() {
         String[] columnas = {"Airport ID", "Airport Name", "City", "Contry"};

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import javax.swing.table.DefaultTableModel;
 import static model.JsonPlane.readPlanes;
 import model.Plane;
@@ -34,8 +35,13 @@ public class AirplaneController {
         return planes;
     }
     
-    public Plane getPlane(int index) {
-        return planes.get(index);
+    public Plane getPlaneByID(String id) {      
+        for (Plane plane : planes) {
+            if (plane.getId().equals(id)) {
+                return plane;               
+            }
+        }
+        return new Plane("NA", "NA", "NA", 0 ,"NA");
     }
     
     //funcion que devuelve un modelo para poner a la lista de aviones en la interfaz

@@ -1,8 +1,10 @@
 package controller;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import static model.JsonFlight.readFlights;
 import model.Flight;
 
 /**
@@ -15,6 +17,11 @@ public class FlightController {
     AirplaneController ac = new AirplaneController();
     LocationController lc = new LocationController();
     
+    //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
+    public FlightController(String a) throws IOException {
+       // flights = readFlights("json/flights.json");
+    }
+    
     public FlightController() {
         
     }
@@ -22,7 +29,7 @@ public class FlightController {
                                //buscara el avión y las ubicaciones por el id para un vuelo
     public Flight createFlight(String flightID, String planeID, String departureLocationId, String arrivalLocationId, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
         //mega contructor para la creacion del vuelo 
-        Flight flight = new Flight(flightID, ac.getPlane(Integer.parseInt(flightID)), lc.getLocation(Integer.parseInt(departureLocationId)), lc.getLocation(Integer.parseInt(arrivalLocationId)), departureDate, hoursDurationArrival, minutesDurationArrival); 
+        Flight flight = new Flight(flightID, ac.getPlaneByID(flightID), lc.getLocationByID(departureLocationId), lc.getLocationByID(arrivalLocationId), departureDate, hoursDurationArrival, minutesDurationArrival); 
         flights.add(flight);
         return flight;
     }
@@ -30,6 +37,7 @@ public class FlightController {
     public static ArrayList<Flight> getFlights() {
         return flights;
     }
+    
     
     public DefaultTableModel toFlightsJList() {
         String[] columnas = {"ID", "Departure Airport ID", "Arrival Airport ID", "Scale airport", "Departure Date", "Arrival Date", "Plane ID", "Number Passengers"};
