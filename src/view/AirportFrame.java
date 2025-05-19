@@ -212,7 +212,7 @@ public class AirportFrame extends javax.swing.JFrame {
         passangersBotonRefresh = new javax.swing.JButton();
         jPanelShowAllFlights = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTableFlights = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jPanelShowAllPlanes = new javax.swing.JPanel();
         planesRefreshButton = new javax.swing.JButton();
@@ -1106,8 +1106,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
         paneOpciones.addTab("Show all passengers", jPanelShowAllPassengers);
 
-        jTable3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFlights.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jTableFlights.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1130,7 +1130,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTableFlights);
 
         jButton4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jButton4.setText("Refresh");
@@ -1554,7 +1554,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         FlightController fc = new FlightController();
-        jTableMyFlights.setModel(fc.toFlightsJList());
+        jTableFlights.setModel(fc.toFlightsJList());
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1695,7 +1695,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableFlights;
     private javax.swing.JTable jTableLocations;
     private javax.swing.JTable jTableMyFlights;
     private javax.swing.JTable jTablePassengers;
