@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import static model.JsonFlight.readFlights;
 import model.Flight;
+import org.json.*;
 
 /**
  *
@@ -47,9 +48,19 @@ public class FlightController {
             System.out.println("Lista de vuelos vacia");
         } else {
             for (Flight f : flights) {
-                Object[] fila = new Object[] { //objeto para poner en el modelo
-                    f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), f.getScaleLocation().getAirportCity() , f.getDepartureDate(), f.calculateArrivalDate(), f.getPlane().getId(), f.getNumPassengers()
-                 };
+                    //dos caminos, uno si scaleLocation es null y otro si no es asi
+                    if (f.getScaleLocation() == null) {
+                       Object[] fila = new Object[] { //objeto para poner en el modelo                                                                  
+                           f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), "NA" , f.getDepartureDate(), f.calculateArrivalDate(), f.getPlane().getId(), f.getNumPassengers()                         
+                        };
+                       model.addRow(fila);  
+                    } else {
+                        Object[] fila = new Object[] { //objeto para poner en e//corregir get scale location que devuelve null --v
+                           f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), f.getScaleLocation().getAirportCity() , f.getDepartureDate(), f.calculateArrivalDate(), f.getPlane().getId(), f.getNumPassengers()                         
+                        };
+                        model.addRow(fila);  
+                    }
+                  
             }
         }
         

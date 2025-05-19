@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import javax.swing.table.DefaultTableModel;
 import static model.JsonLocation.readLocations;
 import model.Location;
