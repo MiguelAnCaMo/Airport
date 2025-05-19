@@ -55,7 +55,7 @@ public class FlightController {
                         };
                        model.addRow(fila);  
                     } else {
-                        Object[] fila = new Object[] { //objeto para poner en e//corregir get scale location que devuelve null --v
+                        Object[] fila = new Object[] { 
                            f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), f.getScaleLocation().getAirportCity() , f.getDepartureDate(), f.calculateArrivalDate(), f.getPlane().getId(), f.getNumPassengers()                         
                         };
                         model.addRow(fila);  
