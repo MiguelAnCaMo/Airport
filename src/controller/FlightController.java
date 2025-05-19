@@ -19,7 +19,7 @@ public class FlightController {
     
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     public FlightController(String a) throws IOException {
-       // flights = readFlights("json/flights.json");
+       flights = readFlights("json/flights.json");
     }
     
     public FlightController() {
