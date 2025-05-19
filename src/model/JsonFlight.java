@@ -29,7 +29,7 @@ public class JsonFlight {
             JSONObject obj = array.getJSONObject(i);
 
             String id = obj.getString("id");
-            Plane plane = ac.getPlaneByID(obj.getString("id"));
+            Plane plane = ac.getPlaneByID(obj.getString("plane"));
             Location departureLocation = lc.getLocationByID(obj.getString("departureLocation"));
             Location arrivalLocation = lc.getLocationByID(obj.getString("arrivalLocation"));
             Location scaleLocation;
