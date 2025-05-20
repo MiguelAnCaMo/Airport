@@ -1409,7 +1409,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private void panelRoundUpMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRoundUpMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_panelRoundUpMouseDragged
-
+    //paneles para mostrar si se selecciono 
     private void administratorSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorSelectActionPerformed
         if (userSelect.isSelected()) {
             userSelect.setSelected(false);
@@ -1421,8 +1421,9 @@ public class AirportFrame extends javax.swing.JFrame {
         }
         paneOpciones.setEnabledAt(5, false);
         paneOpciones.setEnabledAt(6, false);
+        paneOpciones.setEnabledAt(7, false);
     }//GEN-LAST:event_administratorSelectActionPerformed
-
+    //paneles para mostrar si se selecciono user
     private void userSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectActionPerformed
         if (administratorSelect.isSelected()) {
             administratorSelect.setSelected(false);
