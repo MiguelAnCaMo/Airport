@@ -1409,7 +1409,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private void panelRoundUpMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRoundUpMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_panelRoundUpMouseDragged
-    //paneles para mostrar si se selecciono 
+    //paneles para mostrar si se selecciono administrator
     private void administratorSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorSelectActionPerformed
         if (userSelect.isSelected()) {
             userSelect.setSelected(false);

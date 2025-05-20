@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/migue/Downloads/Airport/json/planes.json</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/src/controller/AirplaneController.java</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/src/model/Flight.java</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/src/controller/LocationController.java</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/src/model/JsonFlight.java</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/src/view/AirportFrame.java</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/json/flights.json</file>
-            <file>file:/C:/Users/migue/Downloads/Airport/src/controller/FlightController.java</file>
+            <file>file:/C:/Users/migue/Downloads/Airport/src/model/JsonPassenger.java</file>
         </group>
     </open-files>
 </project-private>
