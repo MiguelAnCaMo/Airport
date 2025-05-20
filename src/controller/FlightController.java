@@ -3,10 +3,10 @@ package controller;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import static model.JsonFlight.readFlights;
 import model.Flight;
-import org.json.*;
 
 /**
  *
@@ -27,7 +27,7 @@ public class FlightController {
         
     }
     
-                               //buscara el avión y las ubicaciones por el id para un vuelo
+                               //buscará el avión y las ubicaciones por el id para un vuelo
     public Flight createFlight(String flightID, String planeID, String departureLocationId, String arrivalLocationId, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
         //mega contructor para la creacion del vuelo 
         Flight flight = new Flight(flightID, ac.getPlaneByID(flightID), lc.getLocationByID(departureLocationId), lc.getLocationByID(arrivalLocationId), departureDate, hoursDurationArrival, minutesDurationArrival); 
@@ -38,7 +38,6 @@ public class FlightController {
     public static ArrayList<Flight> getFlights() {
         return flights;
     }
-    
     
     public DefaultTableModel toFlightsJList() {
         String[] columnas = {"ID", "Departure Airport ID", "Arrival Airport ID", "Scale airport", "Departure Date", "Arrival Date", "Plane ID", "Number Passengers"};
@@ -59,12 +58,20 @@ public class FlightController {
                            f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), f.getScaleLocation().getAirportCity() , f.getDepartureDate(), f.calculateArrivalDate(), f.getPlane().getId(), f.getNumPassengers()                         
                         };
                         model.addRow(fila);  
-                    }
-                  
+                    }              
             }
         }
         
         return model;
     }
+    
+    //devuelve un modelo para el comboBox de flights que esta en la sección Add to flight
+    public static DefaultComboBoxModel<String> getFlightModel() {
+    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+    for (Flight f : flights) {
+        model.addElement(f.getId());
+    }
+    return model;
+}
     
 }

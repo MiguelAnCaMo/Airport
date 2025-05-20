@@ -38,6 +38,10 @@ public class AirportFrame extends javax.swing.JFrame {
         this.generateHours();
         this.generateMinutes();
         this.blockPanels();
+        
+        //comboboxes llenos
+        addToFlightFlightComboBox.setModel(fc.getFlightModel());
+        
     }
 
     private void blockPanels() {
@@ -200,7 +204,7 @@ public class AirportFrame extends javax.swing.JFrame {
         addToFlightID = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        addToFlightFlight = new javax.swing.JComboBox<>();
+        addToFlightFlightComboBox = new javax.swing.JComboBox<>();
         addToFlightAdd = new javax.swing.JButton();
         jPanelShowMyFlights = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -369,6 +373,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
         passengerRegistrationComboBoxMonth.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         passengerRegistrationComboBoxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month" }));
+        passengerRegistrationComboBoxMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passengerRegistrationComboBoxMonthActionPerformed(evt);
+            }
+        });
         jPassengerRegistration.add(passengerRegistrationComboBoxMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, -1, -1));
 
         passengerRegistrationFirstName.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
@@ -934,8 +943,13 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel45.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel45.setText("Flight:");
 
-        addToFlightFlight.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        addToFlightFlight.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flight" }));
+        addToFlightFlightComboBox.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        addToFlightFlightComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flight" }));
+        addToFlightFlightComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addToFlightFlightComboBoxActionPerformed(evt);
+            }
+        });
 
         addToFlightAdd.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         addToFlightAdd.setText("Add");
@@ -956,7 +970,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addComponent(jLabel45))
                 .addGap(79, 79, 79)
                 .addGroup(jPanelAddToFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addToFlightFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addToFlightFlightComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addToFlightID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(829, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddToFlightLayout.createSequentialGroup()
@@ -976,7 +990,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanelAddToFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(addToFlightFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addToFlightFlightComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
                 .addComponent(addToFlightAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
@@ -1498,7 +1512,7 @@ public class AirportFrame extends javax.swing.JFrame {
         FlightController fc = new FlightController();
         fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
 
-        this.addToFlightFlight.addItem(id);
+        this.addToFlightFlightComboBox.addItem(id);
         
     }//GEN-LAST:event_flightRegistrationCreateButtonActionPerformed
 
@@ -1522,7 +1536,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private void addToFlightAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightAddActionPerformed
         // TODO add your handling code here:
         
-        String flightId = addToFlightFlight.getItemAt(addToFlightFlight.getSelectedIndex());
+        String flightId = addToFlightFlightComboBox.getItemAt(addToFlightFlightComboBox.getSelectedIndex());
 
 
     }//GEN-LAST:event_addToFlightAddActionPerformed
@@ -1589,6 +1603,15 @@ public class AirportFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_userSelectComboBoxActionPerformed
 
+    private void addToFlightFlightComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightFlightComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addToFlightFlightComboBoxActionPerformed
+
+    private void passengerRegistrationComboBoxMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passengerRegistrationComboBoxMonthActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_passengerRegistrationComboBoxMonthActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1596,7 +1619,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addToFlightAdd;
-    private javax.swing.JComboBox<String> addToFlightFlight;
+    private javax.swing.JComboBox<String> addToFlightFlightComboBox;
     private javax.swing.JTextField addToFlightID;
     private javax.swing.JRadioButton administratorSelect;
     private javax.swing.JTextField airplaneRegistrationAirline;
