@@ -33,6 +33,23 @@ public class PassengerController {
         return passengers;
     }
     
+    //metodo para modificar la información de un passenger si se encentra el id ingresado
+    public void modifiePassengerInformation(long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode, long phone, String country){
+        for (Passenger passenger : passengers) {
+            if (id == passenger.getId()) {
+                passenger.setFirstname(firstname);
+                passenger.setLastname(lastname);
+                passenger.setBirthDate(birthDate);
+                passenger.setCountryPhoneCode(countryPhoneCode);
+                passenger.setPhone(phone);
+                passenger.setCountry(country);
+                break;
+            } else {
+                System.out.println("No se encontro un passenger con el id " +id);
+            }  
+        }
+    }
+    
     //funcion que devuelve un modelo para poner a la lista de pasajeron en la interfaz
     public DefaultTableModel toPassengersJList() {              
         String[] columnas = {"ID", "Name", "Birthdate", "Age", "Phone", "Country", "Num Flight"};

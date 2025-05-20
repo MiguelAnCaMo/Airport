@@ -20,7 +20,10 @@ public class AirportFrame extends javax.swing.JFrame {
      * Creates new form AirportFrame
      */
     private int x, y;
-    
+    LocationController lc = new LocationController();
+    AirplaneController ac = new AirplaneController();
+    PassengerController pc = new PassengerController();
+    FlightController fc = new FlightController();
 
     public AirportFrame() throws IOException {
         initComponents();
@@ -796,9 +799,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel36.setText("ID:");
 
-        updateID.setEditable(false);
         updateID.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        updateID.setEnabled(false);
 
         jLabel37.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel37.setText("First Name:");
@@ -1528,10 +1529,8 @@ public class AirportFrame extends javax.swing.JFrame {
         int phoneCode = Integer.parseInt(updatePhoneCountryNumber.getText());
         long phone = Long.parseLong(updatePhoneNumber.getText());
         String country = updateContry.getText();
-
         LocalDate birthDate = LocalDate.of(year, month, day);
-
-
+        pc.modifiePassengerInformation(id, firstname, lastname, birthDate, phoneCode, phone, country);
     }//GEN-LAST:event_botonUpdateUpdateActionPerformed
 
     private void addToFlightAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightAddActionPerformed
