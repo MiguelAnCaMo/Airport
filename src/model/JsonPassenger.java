@@ -12,7 +12,11 @@ import org.json.*;
  * @author migue
  */
 public class JsonPassenger {
-    
+
+    public JsonPassenger() {
+        
+    }
+   
     public static ArrayList<Passenger> readPassengers(String path) throws IOException {
         String content = Files.readString(Paths.get(path), StandardCharsets.UTF_8);
         JSONArray array  = new JSONArray(content);

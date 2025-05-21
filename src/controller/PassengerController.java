@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import static model.JsonPassenger.readPassengers;
 import model.Passenger;
+import model.Storage.PassengerStorage;
 /**
  *
  * @author migue
@@ -13,28 +13,29 @@ import model.Passenger;
 public class PassengerController {
     
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
-    private static ArrayList <Passenger> passengers = new ArrayList<>();
+    private static PassengerStorage ps;
 
     public PassengerController(String a) throws IOException {
-        passengers = readPassengers("json/passengers.json");
+        ps = new PassengerStorage();
     }
     
     public PassengerController() {
         
+        
     }
-    
-    public Passenger createPassenger (long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode, long phone, String country) {
+        //creando un passeger y agregandolo a la lista de passengers en storage
+    public void createPassenger (long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode, long phone, String country) {
         Passenger passenger = new Passenger(id, firstname, lastname, birthDate, countryPhoneCode, phone, country);
-        passengers.add(passenger);
-        return passenger; 
+        ps.getPassengers().add(passenger);
     } 
 
-    public static ArrayList<Passenger> getPassengers() {
-        return passengers;
+    public static ArrayList<Passenger> sendPassengers() {
+        return ps.getPassengers();
     }
     
     //metodo para modificar la información de un passenger si se encentra el id ingresado
     public void modifiePassengerInformation(long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode, long phone, String country){
+        ArrayList <Passenger> passengers = ps.getPassengers();
         for (Passenger passenger : passengers) {
             if (id == passenger.getId()) {
                 passenger.setFirstname(firstname);
@@ -55,10 +56,10 @@ public class PassengerController {
         String[] columnas = {"ID", "Name", "Birthdate", "Age", "Phone", "Country", "Num Flight"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
         
-        if (passengers.isEmpty()) {
+        if (ps.getPassengers().isEmpty()) {
             System.out.println("Lista de pasajeros vacia");
         } else {
-            for (Passenger p : passengers) {
+            for (Passenger p : ps.getPassengers()) {
                 Object[] fila = new Object[] { //objeto para poner en el modelo
                   p.getId(), p.getFirstname(), String.valueOf(p.getBirthDate()), p.calculateAge(), p.getPhone(), p.getCountry(), p.getNumFlights()
                 };
