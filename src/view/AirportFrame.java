@@ -101,7 +101,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         panelRound1 = new view.PanelRound();
         panelRoundUp = new view.PanelRound();
-        jButton13 = new javax.swing.JButton();
+        CloneSystemButton = new javax.swing.JButton();
         paneOpciones = new javax.swing.JTabbedPane();
         jPanelAdministration = new javax.swing.JPanel();
         userSelect = new javax.swing.JRadioButton();
@@ -220,7 +220,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jPanelShowAllFlights = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableFlights = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        showAllFlightsButton = new javax.swing.JButton();
         jPanelShowAllPlanes = new javax.swing.JPanel();
         planesRefreshButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -256,14 +256,14 @@ public class AirportFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton13.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jButton13.setText("X");
-        jButton13.setBorderPainted(false);
-        jButton13.setContentAreaFilled(false);
-        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        CloneSystemButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        CloneSystemButton.setText("X");
+        CloneSystemButton.setBorderPainted(false);
+        CloneSystemButton.setContentAreaFilled(false);
+        CloneSystemButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CloneSystemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                CloneSystemButtonActionPerformed(evt);
             }
         });
 
@@ -273,13 +273,13 @@ public class AirportFrame extends javax.swing.JFrame {
             panelRoundUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundUpLayout.createSequentialGroup()
                 .addContainerGap(1083, Short.MAX_VALUE)
-                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CloneSystemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
         panelRoundUpLayout.setVerticalGroup(
             panelRoundUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRoundUpLayout.createSequentialGroup()
-                .addComponent(jButton13)
+                .addComponent(CloneSystemButton)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -1147,11 +1147,11 @@ public class AirportFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableFlights);
 
-        jButton4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jButton4.setText("Refresh");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        showAllFlightsButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        showAllFlightsButton.setText("Refresh");
+        showAllFlightsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                showAllFlightsButtonActionPerformed(evt);
             }
         });
 
@@ -1166,7 +1166,7 @@ public class AirportFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelShowAllFlightsLayout.createSequentialGroup()
                         .addGap(521, 521, 521)
-                        .addComponent(jButton4)))
+                        .addComponent(showAllFlightsButton)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanelShowAllFlightsLayout.setVerticalGroup(
@@ -1175,7 +1175,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(showAllFlightsButton)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -1566,11 +1566,11 @@ public class AirportFrame extends javax.swing.JFrame {
       
     }//GEN-LAST:event_passangersBotonRefreshActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void showAllFlightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllFlightsButtonActionPerformed
         FlightController fc = new FlightController();
         jTableFlights.setModel(fc.toFlightsJList());
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_showAllFlightsButtonActionPerformed
 
     private void planesRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planesRefreshButtonActionPerformed
         AirplaneController aC = new AirplaneController();
@@ -1584,9 +1584,9 @@ public class AirportFrame extends javax.swing.JFrame {
         jTableLocations.setModel(lc.toLocationsJList());
     }//GEN-LAST:event_locationsBotonRefreshActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void CloneSystemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloneSystemButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_CloneSystemButtonActionPerformed
 
     private void userSelectComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectComboBoxActionPerformed
         try {
@@ -1618,6 +1618,7 @@ public class AirportFrame extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CloneSystemButton;
     private javax.swing.JButton addToFlightAdd;
     private javax.swing.JComboBox<String> addToFlightFlightComboBox;
     private javax.swing.JTextField addToFlightID;
@@ -1650,8 +1651,6 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> flightRegistrationDurationComboBoxScaleHour;
     private javax.swing.JComboBox<String> flightRegistrationDurationComboBoxScaleMinute;
     private javax.swing.JTextField flightRegistrationID;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1747,6 +1746,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JTextField passengerRegistrationNumberPhone;
     private javax.swing.JButton passengerRegistrationRegisterButton;
     private javax.swing.JButton planesRefreshButton;
+    private javax.swing.JButton showAllFlightsButton;
     private javax.swing.JButton showMyFlightsBotonRefresh;
     private javax.swing.JTextField updateBirthdate;
     private javax.swing.JTextField updateContry;
