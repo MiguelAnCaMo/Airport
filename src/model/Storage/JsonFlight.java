@@ -1,4 +1,4 @@
-package model;
+package model.Storage;
 
 import controller.AirplaneController;
 import controller.LocationController;
@@ -8,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import model.Flight;
+import model.Location;
+import model.Plane;
 import org.json.*;
 
 /**

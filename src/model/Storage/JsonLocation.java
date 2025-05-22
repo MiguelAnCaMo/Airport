@@ -1,10 +1,11 @@
-package model;
+package model.Storage;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import model.Location;
 import org.json.*;
 
 /**

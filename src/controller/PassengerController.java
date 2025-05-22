@@ -21,7 +21,6 @@ public class PassengerController {
     
     public PassengerController() {
         
-        
     }
         //creando un passeger y agregandolo a la lista de passengers en storage
     public void createPassenger (long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode, long phone, String country) {

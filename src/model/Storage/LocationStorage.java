@@ -4,7 +4,7 @@ import controller.LocationController;
 import java.io.IOException;
 import java.util.ArrayList;
 import model.Location;
-import static model.JsonLocation.readLocations;
+import static model.Storage.JsonLocation.readLocations;
 
 /**
  *

@@ -1,10 +1,11 @@
-package model;
+package model.Storage;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import model.Passenger;
 import org.json.*;
 
 /**
