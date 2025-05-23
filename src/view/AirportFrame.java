@@ -7,7 +7,10 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import controller.PassengerController;
+import controller.utils.Response;
+import controller.utils.Status;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -1442,7 +1445,7 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_userSelectActionPerformed
 
     private void passengerRegistrationRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passengerRegistrationRegisterButtonActionPerformed
-        // TODO add your handling code here:
+        
         long id = Long.parseLong(passengerRegistrationID.getText());
         String firstname = passengerRegistrationFirstName.getText();
         String lastname = passengerRegistrationLastName.getText();
@@ -1456,8 +1459,14 @@ public class AirportFrame extends javax.swing.JFrame {
         this.userSelectComboBox.addItem("" + id);
         
         PassengerController passengerC = new PassengerController();
-        passengerC.createPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
-        
+       
+        Response res=passengerC.registerPassenger(id, firstname, lastname, day, month, year, phoneCode, phone, country);
+        if (res.getStatus()==Status.CREATED) {
+             passengerC.createPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger created successfully", JOptionPane.OK_OPTION);
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_passengerRegistrationRegisterButtonActionPerformed
 
     private void airplaneRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneRegistrationCreateButtonActionPerformed

@@ -1,6 +1,9 @@
 package controller;
 
+import controller.utils.Response;
+import controller.utils.Status;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -67,5 +70,56 @@ public class PassengerController {
         }
         return model;
     }
+    public Response registerPassenger(long id, String firstname, String lastname,
+                                  int day, int month, int year,
+                                  int phoneCode, long phone, String country) {
+    try {
+        // Validación: campos de texto vacíos
+        if (firstname == null || firstname.isEmpty() ||
+            lastname == null || lastname.isEmpty() ||
+            country == null || country.isEmpty()) {
+            return new Response("No text field should be empty", Status.BAD_REQUEST);
+        }
+
+        // Validación de ID
+        if (id < 0 || String.valueOf(id).length() > 15) {
+            return new Response("ID must be at least 0 and less than 15 digits", Status.BAD_REQUEST);
+        }
+
+        // Verificación de duplicado
+        for (Passenger p : ps.getPassengers()) {
+            if (p.getId() == id) {
+                return new Response("Passenger ID already exists", Status.BAD_REQUEST);
+            }
+        }
+
+        // Validación del código de teléfono
+        if (phoneCode < 0 || String.valueOf(phoneCode).length() > 3) {
+            return new Response("Phone code must be at least 0 and less than 3 digits", Status.BAD_REQUEST);
+        }
+
+        // Validación del número de teléfono
+        if (phone < 0 || String.valueOf(phone).length() > 11) {
+            return new Response("Phone number must be at least 0 and less than 11 digits", Status.BAD_REQUEST);
+        }
+
+        // Validación de la fecha de nacimiento
+        try {
+            if (year < 1910 || year > 2024) {
+                return new Response("Invalid birth year", Status.BAD_REQUEST);
+            }
+            LocalDate birthDate = LocalDate.of(year, month, day); // Esto lanza excepción si la fecha es inválida
+        } catch (DateTimeException e) {
+            return new Response("Invalid birthdate", Status.BAD_REQUEST);
+        }
+
+        
+
+        return new Response("Passenger created successfully", Status.CREATED);
+    } catch (Exception ex) {
+        return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+    }
+}
+
     
 }
