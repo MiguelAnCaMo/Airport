@@ -32,6 +32,9 @@ public class JsonPassenger {
         LocalDate birthDate = LocalDate.parse(obj.getString("birthDate"));
         int countryPhoneCode = obj.getInt("countryPhoneCode");
         int phone = obj.getInt("phone");
+            if (phone<0) {
+                phone = phone*-1;
+            }
         String country = obj.getString("country");
         
         

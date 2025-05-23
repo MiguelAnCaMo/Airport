@@ -1,5 +1,7 @@
 package controller;
 
+import controller.utils.Response;
+import controller.utils.Status;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -20,14 +22,15 @@ public class LocationController {
         ls = new LocationStorage();
     }
     
-    public LocationController() {
-        
-    }
+
     
-    public Location createLocation(String airportID, String airportName, String City, String Country) {
+    public Location createLocation(String airportID, String airportName, String City, String Country,double latitude, double longitude) {
         Location location = new Location(airportID, airportName, airportID, airportName, 0, 0);
         ls.getLocations().add(location);
         return location;
+    }
+
+    public LocationController() {
     }
     
     public Location getLocationByID(String id) {
@@ -57,5 +60,60 @@ public class LocationController {
         }
         return model;
     }
+    //metodo auxiliar
+    private boolean hasMaxFourDecimals(double value) {
+    String[] parts = String.valueOf(value).split("\\.");
+    return parts.length < 2 || parts[1].length() <= 4;
+}
+
+   public Response registerLocation(String airportID, String airportName, String city, String country,
+                                 double latitude, double longitude) {
+    try {
+        // Validación: campos de texto vacíos
+        if (airportID == null || airportID.isEmpty() ||
+            airportName == null || airportName.isEmpty() ||
+            city == null || city.isEmpty() ||
+            country == null || country.isEmpty()) {
+            return new Response("No text field should be empty", Status.BAD_REQUEST);
+        }
+
+        // Validación: airportID exactamente 3 letras mayúsculas
+        if (!airportID.matches("^[A-Z]{3}$")) {
+            return new Response("Airport ID must be exactly 3 uppercase letters", Status.BAD_REQUEST);
+        }
+
+        // Validación: duplicado
+        for (Location loc : ls.getLocations()) {
+            if (loc.getAirportId().equalsIgnoreCase(airportID)) {
+                return new Response("Airport ID already exists", Status.BAD_REQUEST);
+            }
+        }
+
+        // Validación: latitud
+        if (latitude < -90 || latitude > 90) {
+            return new Response("Latitude must be in range [-90, 90]", Status.BAD_REQUEST);
+        }
+        if (!hasMaxFourDecimals(latitude)) {
+            return new Response("Latitude must have at most 4 decimal places", Status.BAD_REQUEST);
+        }
+
+        // Validación: longitud
+        if (longitude < -180 || longitude > 180) {
+            return new Response("Longitude must be in range [-180, 180]", Status.BAD_REQUEST);
+        }
+        if (!hasMaxFourDecimals(longitude)) {
+            return new Response("Longitude must have at most 4 decimal places", Status.BAD_REQUEST);
+        }
+
+       
+        
+
+        return new Response("Location created successfully", Status.CREATED);
+    } catch (Exception ex) {
+        return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+    }
+}
+
+
     
 }

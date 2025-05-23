@@ -105,7 +105,7 @@ public class PassengerController {
 
         // Validación de la fecha de nacimiento
         try {
-            if (year < 1910 || year > 2024) {
+            if (year < 1910 || year > 2025) {
                 return new Response("Invalid birth year", Status.BAD_REQUEST);
             }
             LocalDate birthDate = LocalDate.of(year, month, day); // Esto lanza excepción si la fecha es inválida

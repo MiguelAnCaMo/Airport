@@ -1470,7 +1470,7 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_passengerRegistrationRegisterButtonActionPerformed
 
     private void airplaneRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneRegistrationCreateButtonActionPerformed
-        // TODO add your handling code here:
+       
         String id = airplaneRegistrationID.getText();
         String brand = airplaneRegistrationBrand.getText();
         String model = airplaneRegistrationModel.getText();
@@ -1481,7 +1481,14 @@ public class AirportFrame extends javax.swing.JFrame {
         this.flightRegistrationComboBoxPlane.addItem(id);
         
         AirplaneController aC = new AirplaneController();
-        aC.createPlane(id, brand, model, maxCapacity, airline);
+        
+        Response res=aC.registerAirplane(id, brand, model, maxCapacity, airline);
+        if (res.getStatus()==Status.CREATED) {
+             aC.createPlane(id, brand, model, maxCapacity, airline);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.OK_OPTION);
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_airplaneRegistrationCreateButtonActionPerformed
 
     private void locationRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationRegistrationCreateButtonActionPerformed
@@ -1498,7 +1505,13 @@ public class AirportFrame extends javax.swing.JFrame {
         this.flightRegistrationComboBoxScaleLocation.addItem(id);
         
         LocationController lc = new LocationController();
-        lc.createLocation(id, name, city, country);
+         Response res=lc.registerLocation(id, name, city, country,latitude,longitude);
+        if (res.getStatus()==Status.CREATED) {
+             lc.createLocation(id, name, city, country, latitude, longitude);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.OK_OPTION);
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_locationRegistrationCreateButtonActionPerformed
 
     private void flightRegistrationCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightRegistrationCreateButtonActionPerformed
