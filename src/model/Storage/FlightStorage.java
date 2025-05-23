@@ -2,7 +2,9 @@ package model.Storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import model.Flight;
+import model.Plane;
 import static model.Storage.JsonFlight.readFlights;
 
 /**
@@ -14,6 +16,7 @@ public class FlightStorage {
 
     public FlightStorage() throws IOException {
         flights = readFlights("json/flights.json");
+        flights.sort(Comparator.comparing(Flight::getId));
     }
 
     public ArrayList<Flight> getFlights() {

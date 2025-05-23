@@ -3,7 +3,9 @@ package model.Storage;
 import controller.LocationController;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import model.Location;
+import model.Plane;
 import static model.Storage.JsonLocation.readLocations;
 
 /**
@@ -16,6 +18,7 @@ public class LocationStorage {
 
     public LocationStorage() throws IOException {
        locations = readLocations("json/locations.json");
+       locations.sort(Comparator.comparing(Location::getAirportId));
     }
     
     public ArrayList <Location> getLocations() {
