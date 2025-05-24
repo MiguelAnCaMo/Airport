@@ -83,7 +83,7 @@ public class PassengerController {
 
         // Validación de ID
         if (id < 0 || String.valueOf(id).length() > 15) {
-            return new Response("ID must be at least 0 and less than 15 digits", Status.BAD_REQUEST);
+            return new Response("ID must be at least and at most 15 digits", Status.BAD_REQUEST);
         }
 
         // Verificación de duplicado
@@ -95,7 +95,7 @@ public class PassengerController {
 
         // Validación del código de teléfono
         if (phoneCode < 0 || String.valueOf(phoneCode).length() > 3) {
-            return new Response("Phone code must be at least 0 and less than 3 digits", Status.BAD_REQUEST);
+            return new Response("Phone code must be at least 0 and at most 3 digits", Status.BAD_REQUEST);
         }
 
         // Validación del número de teléfono
@@ -120,6 +120,30 @@ public class PassengerController {
         return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
     }
 }
-
+public Response modifyInfo(long id, String firstname, String lastname,
+                                  int day, int month, int year,
+                                  int phoneCode, long phone, String country){
+   boolean founded = false;
+         for (Passenger passenger : ps.getPassengers()) {
+            
+        if (id == passenger.getId()) {
+                passenger.setFirstname(firstname);
+                passenger.setLastname(lastname);
+                LocalDate birthDate = LocalDate.of(year, month, day);
+                passenger.setBirthDate(birthDate);
+                passenger.setCountryPhoneCode(phoneCode);
+                passenger.setPhone(phone);
+                passenger.setCountry(country);
+               founded=true;
+                break;
+            } 
+               
+    }if (founded) {
+        return new Response("Passenger updated successfully", Status.OK);
+    }
+  
+   return new Response ("Passenger id not found",Status.NOT_FOUND);
+   
+}
     
 }

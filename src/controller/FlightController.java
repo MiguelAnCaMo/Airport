@@ -1,12 +1,17 @@
 package controller;
 
+import controller.utils.Response;
+import controller.utils.Status;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.Flight;
+import model.Location;
+import model.Plane;
 import model.Storage.FlightStorage;
+import model.Storage.LocationStorage;
 
 /**
  *
@@ -15,12 +20,14 @@ import model.Storage.FlightStorage;
 public class FlightController {
     
     private static FlightStorage fs;
+    private static LocationStorage ls;
     AirplaneController ac = new AirplaneController();
     LocationController lc = new LocationController();
     
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     public FlightController(String a) throws IOException {
        fs = new FlightStorage();
+       ls = new LocationStorage();
     }
     
     public FlightController() {
@@ -38,6 +45,8 @@ public class FlightController {
     public static ArrayList<Flight> sendFlights() {
         return fs.getFlights();
     }
+    
+     
     
     public DefaultTableModel toFlightsJList() {
         String[] columnas = {"ID", "Departure Airport ID", "Arrival Airport ID", "Scale airport", "Departure Date", "Arrival Date", "Plane ID", "Number Passengers"};
@@ -72,6 +81,51 @@ public class FlightController {
         model.addElement(f.getId());
     }
     return model;
+}
+  public Response registerFlight(String id, String planeId, String departureLocationId, String scaleLocationId,
+                               String arrivalLocationId, LocalDateTime departureDate,
+                               int hoursDurationArrival, int minutesDurationArrival,
+                               int hoursDurationScale, int minutesDurationScale) {
+    try {
+        // Validación de campos obligatorios
+        if (id == null || id.isEmpty() || planeId == null || departureLocationId == null || 
+            arrivalLocationId == null || departureDate == null) {
+            return new Response("No field should be null or empty", Status.BAD_REQUEST);
+        }
+
+        // Validación de ID único
+        for (Flight f : fs.getFlights()) {
+            if (f.getId().equals(id)) {
+                return new Response("Flight ID already exists", Status.BAD_REQUEST);
+            }
+        }
+
+        // Validación de fecha de salida (no debe ser en el pasado)
+        if (departureDate.isBefore(LocalDateTime.now())) {
+            return new Response("Departure date must be in the future", Status.BAD_REQUEST);
+        }
+
+        // Validación de duración (vuelo)
+        if (hoursDurationArrival < 0 || minutesDurationArrival < 0 || (hoursDurationArrival == 0 && minutesDurationArrival == 0)) {
+            return new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
+        }
+
+        // Validación de duración (escala)
+        if ((hoursDurationScale < 0 || minutesDurationScale < 0) ||
+            (hoursDurationScale == 0 && minutesDurationScale == 0 && scaleLocationId != null)) {
+            return new Response("Scale duration must be greater than 00:00 if scale location is provided", Status.BAD_REQUEST);
+        }
+
+        // Crear y registrar vuelo
+        Flight newFlight = new Flight(id, ac.getPlaneByID(planeId), lc.getLocationByID(departureLocationId), lc.getLocationByID(scaleLocationId), lc.getLocationByID(arrivalLocationId),
+                                      departureDate, hoursDurationArrival, minutesDurationArrival,
+                                      hoursDurationScale, minutesDurationScale);
+        fs.getFlights().add(newFlight);
+
+        return new Response("Flight created successfully", Status.CREATED);
+    } catch (Exception ex) {
+        return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+    }
 }
     
 }

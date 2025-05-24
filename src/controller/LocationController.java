@@ -69,7 +69,7 @@ public class LocationController {
    public Response registerLocation(String airportID, String airportName, String city, String country,
                                  double latitude, double longitude) {
     try {
-        // Validación: campos de texto vacíos
+        // verificacion si los campos estan vacios
         if (airportID == null || airportID.isEmpty() ||
             airportName == null || airportName.isEmpty() ||
             city == null || city.isEmpty() ||
@@ -77,19 +77,19 @@ public class LocationController {
             return new Response("No text field should be empty", Status.BAD_REQUEST);
         }
 
-        // Validación: airportID exactamente 3 letras mayúsculas
+        // airportid verificacion
         if (!airportID.matches("^[A-Z]{3}$")) {
             return new Response("Airport ID must be exactly 3 uppercase letters", Status.BAD_REQUEST);
         }
 
-        // Validación: duplicado
+        // validar si hay duplicado 
         for (Location loc : ls.getLocations()) {
             if (loc.getAirportId().equalsIgnoreCase(airportID)) {
                 return new Response("Airport ID already exists", Status.BAD_REQUEST);
             }
         }
 
-        // Validación: latitud
+        // validar latitud
         if (latitude < -90 || latitude > 90) {
             return new Response("Latitude must be in range [-90, 90]", Status.BAD_REQUEST);
         }
@@ -97,7 +97,7 @@ public class LocationController {
             return new Response("Latitude must have at most 4 decimal places", Status.BAD_REQUEST);
         }
 
-        // Validación: longitud
+        // validar longitud
         if (longitude < -180 || longitude > 180) {
             return new Response("Longitude must be in range [-180, 180]", Status.BAD_REQUEST);
         }

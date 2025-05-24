@@ -12,6 +12,7 @@ import controller.utils.Status;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Passenger;
 
 /**
  *
@@ -902,7 +903,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanelUpdateInfoLayout.createSequentialGroup()
                         .addGap(507, 507, 507)
                         .addComponent(botonUpdateUpdate)))
-                .addContainerGap(555, Short.MAX_VALUE))
+                .addContainerGap(558, Short.MAX_VALUE))
         );
         jPanelUpdateInfoLayout.setVerticalGroup(
             jPanelUpdateInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -944,7 +945,6 @@ public class AirportFrame extends javax.swing.JFrame {
         paneOpciones.addTab("Update info", jPanelUpdateInfo);
 
         addToFlightID.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        addToFlightID.setEnabled(false);
 
         jLabel44.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel44.setText("ID:");
@@ -1558,10 +1558,19 @@ public class AirportFrame extends javax.swing.JFrame {
         LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
         
         FlightController fc = new FlightController();
-        fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
+       Response res=fc.registerFlight(id, planeId, departureLocationId, arrivalLocationId, scaleLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
 
         this.addToFlightFlightComboBox.addItem(id);
-        
+        if (res.getStatus()==Status.CREATED) {
+              fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: flight created successfully", JOptionPane.OK_OPTION);
+              flightRegistrationID.setText("");
+              flightRegistrationComboBoxPlane.setSelectedIndex(0);
+              flightRegistrationComboBoxDepartureLocation.setSelectedIndex(0);
+              
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_flightRegistrationCreateButtonActionPerformed
 
     private void botonUpdateUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUpdateUpdateActionPerformed
@@ -1576,7 +1585,19 @@ public class AirportFrame extends javax.swing.JFrame {
         long phone = Long.parseLong(updatePhoneNumber.getText());
         String country = updateContry.getText();
         LocalDate birthDate = LocalDate.of(year, month, day);
-        pc.modifiePassengerInformation(id, firstname, lastname, birthDate, phoneCode, phone, country);
+         PassengerController pc= new PassengerController();
+        Response res= pc.modifyInfo(id, firstname, lastname, day, month, year, phoneCode, phone, country);
+        if (res.getStatus()==Status.OK) {
+              
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.OK_OPTION);
+              flightRegistrationID.setText("");
+              flightRegistrationComboBoxPlane.setSelectedIndex(0);
+              flightRegistrationComboBoxDepartureLocation.setSelectedIndex(0);
+              
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not modified correctly", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_botonUpdateUpdateActionPerformed
 
     private void addToFlightAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightAddActionPerformed

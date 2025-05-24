@@ -22,7 +22,10 @@ public class Flight {
     private int minutesDurationScale;
     
 
-    public Flight(String id, Plane plane, Location departureLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
+    public Flight(String id, Plane plane
+            , Location departureLocation, Location arrivalLocation
+            , LocalDateTime departureDate
+            , int hoursDurationArrival, int minutesDurationArrival) {
         this.id = id;
         this.passengers = new ArrayList<>();
         this.plane = plane;
@@ -35,7 +38,12 @@ public class Flight {
         this.plane.addFlight(this);
     }
 
-    public Flight(String id, Plane plane, Location departureLocation, Location scaleLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival, int hoursDurationScale, int minutesDurationScale) {
+    public Flight(String id, Plane plane, Location departureLocation
+            , Location scaleLocation
+            , Location arrivalLocation
+            , LocalDateTime departureDate
+            , int hoursDurationArrival, int minutesDurationArrival
+            , int hoursDurationScale, int minutesDurationScale) {
         this.id = id;
         this.passengers = new ArrayList<>();
         this.plane = plane;

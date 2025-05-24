@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/usuario/Desktop/Airport/src/view/AirportFrame.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Airport/src/controller/AirplaneController.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Airport/src/controller/FlightController.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Airport/src/model/Flight.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Airport/src/controller/PassengerController.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Airport/src/controller/LocationController.java</file>
+        </group>
     </open-files>
 </project-private>
