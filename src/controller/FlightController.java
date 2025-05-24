@@ -132,7 +132,7 @@ public class FlightController {
     public DefaultComboBoxModel<String> getUserModel() {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         for (Passenger p : ps.getPassengers()) {
-            model.addElement(p.getFullname());
+            model.addElement(String.valueOf(p.getId()));
         }
         return model;
     }
