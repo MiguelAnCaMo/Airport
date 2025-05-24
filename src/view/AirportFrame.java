@@ -1624,8 +1624,13 @@ public class AirportFrame extends javax.swing.JFrame {
         String flightId = delayFlightIDComboBox.getItemAt(delayFlightIDComboBox.getSelectedIndex());
         int hours = Integer.parseInt(delayFlightHour.getItemAt(delayFlightHour.getSelectedIndex()));
         int minutes = Integer.parseInt(delayFlightMinute.getItemAt(delayFlightMinute.getSelectedIndex()));
-//        fc.delayFlight(flightId, hours, minutes);
-
+        Response res=fc.delayFlight(flightId, hours, minutes);
+        if (res.getStatus()==Status.OK) {
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Success: flight delayed", JOptionPane.INFORMATION_MESSAGE);
+           
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: flight not found", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_delayFlightDelayButtonActionPerformed
 
     private void showMyFlightsBotonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMyFlightsBotonRefreshActionPerformed

@@ -82,13 +82,13 @@ public class FlightController {
     }
 
     public Response addPassengerToFlight(String flightId, int passengerIdSearch) {
-        boolean found=false;
+        boolean found = false;
         for (Passenger p : ps.getPassengers()) {
             if (p.getId() == passengerIdSearch) {
                 for (Flight f : fs.getFlights()) {
                     if (f.getId().equals(flightId)) {
                         f.addPassenger(p);
-                        found=true;
+                        found = true;
                         break;
                     }
 
@@ -97,10 +97,10 @@ public class FlightController {
 
         }
         if (found) {
-           Response b=new Response("Passenger added to flight ", Status.OK);
+            Response b = new Response("Passenger added to flight ", Status.OK);
             return b.clone();
         }
-        Response b =new Response("Passenger id not found ", Status.NOT_FOUND); 
+        Response b = new Response("Passenger id not found ", Status.NOT_FOUND);
         return b.clone();
     }
 
@@ -113,10 +113,17 @@ public class FlightController {
         return model;
     }
 
-//    public Response delayFlight(int hours, int minutes) {
-//        f.
-//        
-//    }
+    public Response delayFlight(String flightsId, int hours, int minutes) {
+        for (Flight f : fs.getFlights()) {
+            if (flightsId.equals(f.getId())) {
+                f.delay(hours, minutes);
+                Response b = new Response("flight delayed succesfully  ", Status.OK);
+                return b.clone();
+            }
+        }
+        Response base = new Response("flight not found", Status.BAD_REQUEST);
+        return base.clone();
+    }
 
     public Response registerFlight(String id, String planeId, String departureLocationId, String scaleLocationId,
             String arrivalLocationId, LocalDateTime departureDate,
@@ -133,7 +140,7 @@ public class FlightController {
             // Validación de ID único
             for (Flight f : fs.getFlights()) {
                 if (f.getId().equals(id)) {
-                    Response base =new Response("Flight ID already exists", Status.BAD_REQUEST);
+                    Response base = new Response("Flight ID already exists", Status.BAD_REQUEST);
                     return base.clone();
                 }
             }
@@ -146,7 +153,7 @@ public class FlightController {
 
             // Validación de duración (vuelo)
             if (hoursDurationArrival < 0 || minutesDurationArrival < 0 || (hoursDurationArrival == 0 && minutesDurationArrival == 0)) {
-               Response base = new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
+                Response base = new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
                 return base.clone();
             }
 
