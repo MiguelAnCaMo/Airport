@@ -10,7 +10,7 @@ import model.Flight;
  */
 public class MyFlightsStorage {
     
-    private static ArrayList<Flight> myflights = new ArrayList<>();
+    private ArrayList<Flight> myflights = new ArrayList<>();
 
     public MyFlightsStorage() {
         myflights.sort(Comparator.comparing(Flight::getId));

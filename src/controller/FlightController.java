@@ -91,8 +91,8 @@ public class FlightController {
                 for (Flight f : fs.getFlights()) {
                     if (f.getId().equals(flightId)) {
                         f.addPassenger(p);
+                        p.addFlight(f);
                         found = true;
-                        myFs.getMyflights().add(f);
                         break;
                     }
 
@@ -108,15 +108,21 @@ public class FlightController {
         return b.clone();
     }
     
-    public DefaultTableModel toMyFlighsJlist() {
+    
+    public DefaultTableModel getPassengerFlights(String idSearch) {
         String[] columnas = {"ID", "Departure Date", "Arrival Date"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
-         for (Flight f : myFs.getMyflights()) {
-            Object[] fila = new Object[]{ //objeto para poner en el modelo                                                                  
-                        f.getId(), f.getDepartureDate(), f.calculateArrivalDate()
-            };
-            model.addRow(fila);
-         }
+        for (Passenger p : ps.getPassengers()) {
+          if (String.valueOf(p.getId()).equals(idSearch)) {
+              for (Flight f : p.getFlights()) {
+                Object[] fila = new Object[]{ //objeto para poner en el modelo                                                                  
+                     f.getId(), f.getDepartureDate(), f.calculateArrivalDate()
+                };
+                model.addRow(fila);
+              }
+              break;
+          }    
+        }
         return model;
     }
     

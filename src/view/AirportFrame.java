@@ -945,7 +945,9 @@ public class AirportFrame extends javax.swing.JFrame {
 
         paneOpciones.addTab("Update info", jPanelUpdateInfo);
 
+        addToFlightID.setEditable(false);
         addToFlightID.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        addToFlightID.setEnabled(false);
 
         jLabel44.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel44.setText("ID:");
@@ -1605,10 +1607,10 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_botonUpdateUpdateActionPerformed
 
     private void addToFlightAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightAddActionPerformed
-        
+        addToFlightID.setText(String.valueOf(userSelectComboBox.getSelectedItem()));
         String flightId = addToFlightFlightComboBox.getItemAt(addToFlightFlightComboBox.getSelectedIndex());
         int passengerIdSearch=Integer.parseInt(addToFlightID.getText());
-        Response res=fc.addPassengerToFlight(flightId, passengerIdSearch);
+        Response res = fc.addPassengerToFlight(flightId, passengerIdSearch);
         if (res.getStatus()==Status.OK) {
             JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.INFORMATION_MESSAGE);
             addToFlightID.setText("");
@@ -1634,9 +1636,10 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_delayFlightDelayButtonActionPerformed
 
     private void showMyFlightsBotonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMyFlightsBotonRefreshActionPerformed
-        //long passengerId = Long.parseLong(userSelectComboBox.getItemAt(userSelectComboBox.getSelectedIndex()));
-      
-        jTableMyFlights.setModel(fc.toMyFlighsJlist());
+        
+        String idCombobox = String.valueOf(userSelectComboBox.getSelectedItem());
+        
+        jTableMyFlights.setModel(fc.getPassengerFlights(idCombobox));
         
         
     }//GEN-LAST:event_showMyFlightsBotonRefreshActionPerformed
@@ -1671,18 +1674,7 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_CloneSystemButtonActionPerformed
 
     private void userSelectComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectComboBoxActionPerformed
-        try {
-            String id = userSelectComboBox.getSelectedItem().toString();
-            if (! id.equals(userSelectComboBox.getItemAt(0))) {
-                updateID.setText(id);
-                addToFlightID.setText(id);
-            }
-            else{
-                updateID.setText("");
-                addToFlightID.setText("");
-            }
-        } catch (Exception e) {
-        }
+          addToFlightID.setText(String.valueOf(userSelectComboBox.getSelectedItem()));
     }//GEN-LAST:event_userSelectComboBoxActionPerformed
 
     private void addToFlightFlightComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightFlightComboBoxActionPerformed
