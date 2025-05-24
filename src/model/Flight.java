@@ -118,5 +118,13 @@ public class Flight {
     public int getNumPassengers() {
         return passengers.size();
     }
+
+    public void setHoursDurationArrival(int hoursDurationArrival) {
+        this.hoursDurationArrival = hoursDurationArrival;
+    }
+
+    public void setMinutesDurationArrival(int minutesDurationArrival) {
+        this.minutesDurationArrival = minutesDurationArrival;
+    }
     
 }

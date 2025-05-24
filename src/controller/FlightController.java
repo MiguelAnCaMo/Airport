@@ -3,12 +3,14 @@ package controller;
 import controller.utils.Response;
 import controller.utils.Status;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.Flight;
 import model.Location;
+import model.Passenger;
 import model.Plane;
 import model.Storage.FlightStorage;
 import model.Storage.LocationStorage;
@@ -82,6 +84,17 @@ public class FlightController {
     }
     return model;
 }
+    public void delayFlight(String flightId,int hours,int minutes){
+        
+        for (Flight f : fs.getFlights()) {
+            if (flightId .equals(f.getId())) {
+                f.setHoursDurationArrival(hours);
+                f.setMinutesDurationArrival(minutes);
+                break;
+            } 
+        }
+    }
+    
   public Response registerFlight(String id, String planeId, String departureLocationId, String scaleLocationId,
                                String arrivalLocationId, LocalDateTime departureDate,
                                int hoursDurationArrival, int minutesDurationArrival,

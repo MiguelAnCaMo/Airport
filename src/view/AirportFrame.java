@@ -46,9 +46,9 @@ public class AirportFrame extends javax.swing.JFrame {
         this.generateMinutes();
         this.blockPanels();
         
-        //comboboxes llenos
+        //comboboxes llenos al iniciar el programa
         addToFlightFlightComboBox.setModel(fc.getFlightModel());
-        
+        delayFlightIDComboBox.setModel(fc.getFlightModel());
     }
 
     private void blockPanels() {
@@ -237,7 +237,7 @@ public class AirportFrame extends javax.swing.JFrame {
         delayFlightHour = new javax.swing.JComboBox<>();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
-        delayFlightID = new javax.swing.JComboBox<>();
+        delayFlightIDComboBox = new javax.swing.JComboBox<>();
         jLabel48 = new javax.swing.JLabel();
         delayFlightMinute = new javax.swing.JComboBox<>();
         delayFlightDelayButton = new javax.swing.JButton();
@@ -1316,8 +1316,8 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel47.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel47.setText("ID:");
 
-        delayFlightID.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        delayFlightID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID" }));
+        delayFlightIDComboBox.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        delayFlightIDComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID" }));
 
         jLabel48.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel48.setText("Minutes:");
@@ -1351,7 +1351,7 @@ public class AirportFrame extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addGroup(jPanelDelayFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(delayFlightHour, 0, 105, Short.MAX_VALUE)
-                            .addComponent(delayFlightID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(delayFlightIDComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(820, 820, 820))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDelayFlightLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1364,7 +1364,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanelDelayFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
-                    .addComponent(delayFlightID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(delayFlightIDComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanelDelayFlightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
@@ -1562,12 +1562,15 @@ public class AirportFrame extends javax.swing.JFrame {
 
         this.addToFlightFlightComboBox.addItem(id);
         if (res.getStatus()==Status.CREATED) {
-              fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
+              
+            fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
               JOptionPane.showMessageDialog(null, res.getMessage(), "Success: flight created successfully", JOptionPane.OK_OPTION);
               flightRegistrationID.setText("");
               flightRegistrationComboBoxPlane.setSelectedIndex(0);
               flightRegistrationComboBoxDepartureLocation.setSelectedIndex(0);
-              
+              //actualizar los comboboxes de flights  
+              addToFlightFlightComboBox.setModel(fc.getFlightModel()); 
+              delayFlightIDComboBox.setModel(fc.getFlightModel());
         }else{
             JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
         }
@@ -1610,10 +1613,10 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void delayFlightDelayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delayFlightDelayButtonActionPerformed
         // TODO add your handling code here:
-        String flightId = delayFlightID.getItemAt(delayFlightID.getSelectedIndex());
+        String flightId = delayFlightIDComboBox.getItemAt(delayFlightIDComboBox.getSelectedIndex());
         int hours = Integer.parseInt(delayFlightHour.getItemAt(delayFlightHour.getSelectedIndex()));
         int minutes = Integer.parseInt(delayFlightMinute.getItemAt(delayFlightMinute.getSelectedIndex()));
-
+        fc.delayFlight(flightId, hours, minutes);
 
     }//GEN-LAST:event_delayFlightDelayButtonActionPerformed
 
@@ -1705,7 +1708,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> compoBoxMonth;
     private javax.swing.JButton delayFlightDelayButton;
     private javax.swing.JComboBox<String> delayFlightHour;
-    private javax.swing.JComboBox<String> delayFlightID;
+    private javax.swing.JComboBox<String> delayFlightIDComboBox;
     private javax.swing.JComboBox<String> delayFlightMinute;
     private javax.swing.JComboBox<String> flightRegistrationComboBoxArrivalLocation;
     private javax.swing.JComboBox<String> flightRegistrationComboBoxDepartureLocation;
