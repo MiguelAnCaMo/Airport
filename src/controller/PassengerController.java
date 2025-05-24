@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.Passenger;
 import model.Storage.PassengerStorage;
+import view.AirportFrame;
 /**
  *
  * @author migue
@@ -17,9 +18,10 @@ public class PassengerController {
     
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     private static PassengerStorage ps;
-
-    public PassengerController(String a) throws IOException {
+    private static AirportFrame airportFrame;
+    public PassengerController(String a, AirportFrame af) throws IOException {
         ps = new PassengerStorage();
+        airportFrame = af;
     }
     
     public PassengerController() {

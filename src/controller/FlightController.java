@@ -14,6 +14,7 @@ import model.Passenger;
 import model.Plane;
 import model.Storage.FlightStorage;
 import model.Storage.LocationStorage;
+import view.AirportFrame;
 
 /**
  *
@@ -25,11 +26,13 @@ public class FlightController {
     private static LocationStorage ls;
     AirplaneController ac = new AirplaneController();
     LocationController lc = new LocationController();
+    private static AirportFrame airportFrame;
     
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
-    public FlightController(String a) throws IOException {
+    public FlightController(String a, AirportFrame af) throws IOException {
        fs = new FlightStorage();
        ls = new LocationStorage();
+       airportFrame = af;
     }
     
     public FlightController() {

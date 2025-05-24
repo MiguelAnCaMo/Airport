@@ -32,10 +32,10 @@ public class AirportFrame extends javax.swing.JFrame {
     public AirportFrame() throws IOException {
         initComponents();
         //controladores para la carga de datos
-        LocationController lc = new LocationController(null);
-        AirplaneController ac = new AirplaneController(null);
-        PassengerController pc = new PassengerController(null);
-        FlightController fc = new FlightController(null);
+        LocationController lc = new LocationController(null,this);
+        AirplaneController ac = new AirplaneController(null,this);
+        PassengerController pc = new PassengerController(null,this);
+        FlightController fc = new FlightController(null,this);
         
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);

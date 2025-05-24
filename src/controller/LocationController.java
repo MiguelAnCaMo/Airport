@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.Location;
 import model.Storage.LocationStorage;
+import view.AirportFrame;
 
 
 /**
@@ -16,10 +17,11 @@ import model.Storage.LocationStorage;
 public class LocationController { 
     
     private static LocationStorage ls;
-    
+    private static AirportFrame airportFrame;
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
-    public LocationController(String a) throws IOException {
+    public LocationController(String a, AirportFrame af) throws IOException {
         ls = new LocationStorage();
+        airportFrame = af;
     }
     
 

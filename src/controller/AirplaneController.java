@@ -8,6 +8,7 @@ import java.util.Comparator;
 import javax.swing.table.DefaultTableModel;
 import model.Plane;
 import model.Storage.AirplaneStorage;
+import view.AirportFrame;
 
 /**
  *
@@ -16,10 +17,11 @@ import model.Storage.AirplaneStorage;
 public class AirplaneController {
    
     private static AirplaneStorage as;
-    
+    private static AirportFrame airportFrame;
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
-    public AirplaneController(String a) throws IOException {
+    public AirplaneController(String a, AirportFrame af) throws IOException {
        as = new AirplaneStorage();
+       airportFrame= af;
     }
     
     public AirplaneController() {
