@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import model.Plane;
-import static model.Storage.JsonPlane.readPlanes;
+import static model.json.JsonPlane.readPlanes;
 
 /**
  *

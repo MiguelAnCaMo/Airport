@@ -1,4 +1,4 @@
-package model.Storage;
+package model.json;
 
 import controller.AirplaneController;
 import controller.LocationController;
@@ -50,7 +50,7 @@ public class JsonFlight {
             int minutes2 = obj.getInt("minutesDurationScale");
             //crear objeto tipo flight y guardar en la lista para despues devolverla
             if (scaleLocation == null) {
-                Flight flight = new Flight(id, plane, departureLocation, arrivalLocation, departureDate, hour1, minutes1);
+                 Flight flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate, hour1, minutes1, 0, 0);
                 list.add(flight);
             } else {
                 Flight flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate, hour1, minutes1, hour2, minutes2);

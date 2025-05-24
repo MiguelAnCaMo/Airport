@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import static model.Storage.JsonLocation.readLocations;
+import static model.json.JsonLocation.readLocations;
 import model.Location;
 
 /**

@@ -1,4 +1,4 @@
-package model.Storage;
+package model.json;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

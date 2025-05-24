@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import model.Location;
 import model.Passenger;
-import static model.Storage.JsonPassenger.readPassengers;
+import static model.json.JsonPassenger.readPassengers;
 
 /**
  *

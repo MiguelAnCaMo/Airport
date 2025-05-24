@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import model.Location;
 import model.Plane;
-import static model.Storage.JsonLocation.readLocations;
+import static model.json.JsonLocation.readLocations;
 
 /**
  *

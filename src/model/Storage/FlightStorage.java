@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import model.Flight;
 import model.Plane;
-import static model.Storage.JsonFlight.readFlights;
+import static model.json.JsonFlight.readFlights;
 
 /**
  *

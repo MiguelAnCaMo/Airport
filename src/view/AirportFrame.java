@@ -416,6 +416,11 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel11.setBounds(53, 96, 22, 25);
 
         airplaneRegistrationID.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        airplaneRegistrationID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                airplaneRegistrationIDActionPerformed(evt);
+            }
+        });
         jPanelAirplaneRegistration.add(airplaneRegistrationID);
         airplaneRegistrationID.setBounds(180, 93, 130, 31);
 
@@ -1464,6 +1469,14 @@ public class AirportFrame extends javax.swing.JFrame {
         if (res.getStatus()==Status.CREATED) {
              passengerC.createPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
               JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger created successfully", JOptionPane.OK_OPTION);
+              passengerRegistrationID.setText("");
+              passengerRegistrationFirstName.setText("");
+              passengerRegistrationLastName.setText("");
+              passengerRegistrationBirthday.setText("");
+              passengerRegistrationComboBoxMonth.setSelectedIndex(0);
+              passengerRegistrationComboBoxDay.setSelectedIndex(0);
+              passengerRegistrationContryPhoneNumber.setText("");
+              passengerRegistrationNumberPhone.setText("");
         }else{
             JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
         }
@@ -1486,6 +1499,11 @@ public class AirportFrame extends javax.swing.JFrame {
         if (res.getStatus()==Status.CREATED) {
              aC.createPlane(id, brand, model, maxCapacity, airline);
               JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.OK_OPTION);
+              airplaneRegistrationID.setText("");
+              airplaneRegistrationBrand.setText("");
+              airplaneRegistrationModel.setText("");
+              airplaneRegistrationMaxCapacity.setText("");
+              airplaneRegistrationAirline.setText("");
         }else{
             JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
         }
@@ -1509,6 +1527,12 @@ public class AirportFrame extends javax.swing.JFrame {
         if (res.getStatus()==Status.CREATED) {
              lc.createLocation(id, name, city, country, latitude, longitude);
               JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.OK_OPTION);
+              locationRegistrationID.setText("");
+              locationRegistrationName.setText("");
+              locationRegistrationAirportName.setText("");
+              locationRegistrationContry.setText("");
+              locationRegistrationLatitude.setText("");
+              locationRegistrationLongitude.setText("");
         }else{
             JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not registered correctly", JOptionPane.ERROR_MESSAGE);
         }
@@ -1633,6 +1657,10 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_passengerRegistrationComboBoxMonthActionPerformed
+
+    private void airplaneRegistrationIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airplaneRegistrationIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_airplaneRegistrationIDActionPerformed
 
     /**
      * @param args the command line arguments
