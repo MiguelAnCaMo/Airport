@@ -47,6 +47,7 @@ public class AirportFrame extends javax.swing.JFrame {
         this.blockPanels();
         
         //comboboxes llenos al iniciar el programa
+        userSelectComboBox.setModel(fc.getUserModel());
         addToFlightFlightComboBox.setModel(fc.getFlightModel());
         delayFlightIDComboBox.setModel(fc.getFlightModel());
     }
@@ -1604,7 +1605,6 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_botonUpdateUpdateActionPerformed
 
     private void addToFlightAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToFlightAddActionPerformed
-        // TODO add your handling code here:
         
         String flightId = addToFlightFlightComboBox.getItemAt(addToFlightFlightComboBox.getSelectedIndex());
         int passengerIdSearch=Integer.parseInt(addToFlightID.getText());
@@ -1634,11 +1634,10 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_delayFlightDelayButtonActionPerformed
 
     private void showMyFlightsBotonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMyFlightsBotonRefreshActionPerformed
-        // TODO add your handling code here:
-        long passengerId = Long.parseLong(userSelectComboBox.getItemAt(userSelectComboBox.getSelectedIndex()));
+        //long passengerId = Long.parseLong(userSelectComboBox.getItemAt(userSelectComboBox.getSelectedIndex()));
       
-        DefaultTableModel model = (DefaultTableModel) jTableMyFlights.getModel();
-        model.setRowCount(0);
+        jTableMyFlights.setModel(fc.toMyFlighsJlist());
+        
         
     }//GEN-LAST:event_showMyFlightsBotonRefreshActionPerformed
 

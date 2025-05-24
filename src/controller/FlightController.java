@@ -14,6 +14,7 @@ import model.Passenger;
 import model.Plane;
 import model.Storage.FlightStorage;
 import model.Storage.LocationStorage;
+import model.Storage.MyFlightsStorage;
 import model.Storage.PassengerStorage;
 import view.AirportFrame;
 
@@ -29,6 +30,7 @@ public class FlightController {
     LocationController lc = new LocationController();
     private static AirportFrame airportFrame;
     private static PassengerStorage ps;
+    private static MyFlightsStorage myFs;
     PassengerController pc = new PassengerController();
 
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
@@ -37,6 +39,7 @@ public class FlightController {
         ls = new LocationStorage();
         airportFrame = af;
         ps = new PassengerStorage();
+        myFs = new MyFlightsStorage();
     }
 
     public FlightController() {
@@ -89,6 +92,7 @@ public class FlightController {
                     if (f.getId().equals(flightId)) {
                         f.addPassenger(p);
                         found = true;
+                        myFs.getMyflights().add(f);
                         break;
                     }
 
@@ -103,7 +107,19 @@ public class FlightController {
         Response b = new Response("Passenger id not found ", Status.NOT_FOUND);
         return b.clone();
     }
-
+    
+    public DefaultTableModel toMyFlighsJlist() {
+        String[] columnas = {"ID", "Departure Date", "Arrival Date"};
+        DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
+         for (Flight f : myFs.getMyflights()) {
+            Object[] fila = new Object[]{ //objeto para poner en el modelo                                                                  
+                        f.getId(), f.getDepartureDate(), f.calculateArrivalDate()
+            };
+            model.addRow(fila);
+         }
+        return model;
+    }
+    
     //devuelve un modelo para el comboBox de flights que esta en la sección Add to flight
     public static DefaultComboBoxModel<String> getFlightModel() {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -112,7 +128,15 @@ public class FlightController {
         }
         return model;
     }
-
+    
+    public DefaultComboBoxModel<String> getUserModel() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (Passenger p : ps.getPassengers()) {
+            model.addElement(p.getFullname());
+        }
+        return model;
+    }
+    
     public Response delayFlight(String flightsId, int hours, int minutes) {
         for (Flight f : fs.getFlights()) {
             if (flightsId.equals(f.getId())) {
@@ -176,5 +200,7 @@ public class FlightController {
             return base.clone();
         }
     }
-
+    
+    
+    
 }
