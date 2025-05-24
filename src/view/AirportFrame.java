@@ -1620,11 +1620,11 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addToFlightAddActionPerformed
 
     private void delayFlightDelayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delayFlightDelayButtonActionPerformed
-        // TODO add your handling code here:
+        
         String flightId = delayFlightIDComboBox.getItemAt(delayFlightIDComboBox.getSelectedIndex());
         int hours = Integer.parseInt(delayFlightHour.getItemAt(delayFlightHour.getSelectedIndex()));
         int minutes = Integer.parseInt(delayFlightMinute.getItemAt(delayFlightMinute.getSelectedIndex()));
-        fc.delayFlight(flightId, hours, minutes);
+//        fc.delayFlight(flightId, hours, minutes);
 
     }//GEN-LAST:event_delayFlightDelayButtonActionPerformed
 

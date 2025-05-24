@@ -80,46 +80,54 @@ public class PassengerController {
         if (firstname == null || firstname.isEmpty() ||
             lastname == null || lastname.isEmpty() ||
             country == null || country.isEmpty()) {
-            return new Response("No text field should be empty", Status.BAD_REQUEST);
+            Response b= new Response("No text field should be empty", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         // Validación de ID
         if (id < 0 || String.valueOf(id).length() > 15) {
-            return new Response("ID must be at least and at most 15 digits", Status.BAD_REQUEST);
+            Response b=new Response("ID must be at least and at most 15 digits", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         // Verificación de duplicado
         for (Passenger p : ps.getPassengers()) {
             if (p.getId() == id) {
-                return new Response("Passenger ID already exists", Status.BAD_REQUEST);
+                Response b = new Response("Passenger ID already exists", Status.BAD_REQUEST);
+                return b.clone();
             }
         }
 
         // Validación del código de teléfono
         if (phoneCode < 0 || String.valueOf(phoneCode).length() > 3) {
-            return new Response("Phone code must be at least 0 and at most 3 digits", Status.BAD_REQUEST);
+            Response b= new Response("Phone code must be at least 0 and at most 3 digits", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         // Validación del número de teléfono
         if (phone < 0 || String.valueOf(phone).length() > 11) {
-            return new Response("Phone number must be at least 0 and less than 11 digits", Status.BAD_REQUEST);
+            Response b = new Response("Phone number must be at least 0 and less than 11 digits", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         // Validación de la fecha de nacimiento
         try {
             if (year < 1910 || year > 2025) {
-                return new Response("Invalid birth year", Status.BAD_REQUEST);
+                Response b=new Response("Invalid birth year", Status.BAD_REQUEST);
+                return b.clone();
             }
             LocalDate birthDate = LocalDate.of(year, month, day); // Esto lanza excepción si la fecha es inválida
         } catch (DateTimeException e) {
-            return new Response("Invalid birthdate", Status.BAD_REQUEST);
+            Response b =new Response("Invalid birthdate", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         
-
-        return new Response("Passenger created successfully", Status.CREATED);
+        Response b = new Response("Passenger created successfully", Status.CREATED);
+        return b.clone();
     } catch (Exception ex) {
-        return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+        Response b= new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+        return b.clone();
     }
 }
 public Response modifyInfo(long id, String firstname, String lastname,
@@ -141,10 +149,11 @@ public Response modifyInfo(long id, String firstname, String lastname,
             } 
                
     }if (founded) {
-        return new Response("Passenger updated successfully", Status.OK);
+       Response b= new Response("Passenger updated successfully", Status.OK);
+        return b.clone();
     }
-  
-   return new Response ("Passenger id not found",Status.NOT_FOUND);
+  Response b=new Response ("Passenger id not found",Status.NOT_FOUND);
+   return b.clone();
    
 }
     

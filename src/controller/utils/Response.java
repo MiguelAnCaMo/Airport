@@ -4,7 +4,7 @@ package controller.utils;
  *
  * @author migue
  */
-public class Response {
+public class Response implements Cloneable{
     
     private String message;
     private int status;
@@ -32,5 +32,13 @@ public class Response {
     public Object getObject() {
         return object;
     }
-    
+    @Override
+    public Response clone() {
+        try {
+            return (Response) super.clone(); // shallow copy
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(); // no debería pasar
+        }
+    }
+
 }

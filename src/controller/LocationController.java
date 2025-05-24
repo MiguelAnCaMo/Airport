@@ -76,43 +76,52 @@ public class LocationController {
             airportName == null || airportName.isEmpty() ||
             city == null || city.isEmpty() ||
             country == null || country.isEmpty()) {
-            return new Response("No text field should be empty", Status.BAD_REQUEST);
+            Response b = new Response("No text field should be empty", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         // airportid verificacion
         if (!airportID.matches("^[A-Z]{3}$")) {
-            return new Response("Airport ID must be exactly 3 uppercase letters", Status.BAD_REQUEST);
+            Response b =new Response("Airport ID must be exactly 3 uppercase letters", Status.BAD_REQUEST);
+            return b.clone();
+                    
         }
 
         // validar si hay duplicado 
         for (Location loc : ls.getLocations()) {
             if (loc.getAirportId().equalsIgnoreCase(airportID)) {
-                return new Response("Airport ID already exists", Status.BAD_REQUEST);
+                Response b =new Response("Airport ID already exists", Status.BAD_REQUEST);
+                return b.clone();
             }
         }
 
         // validar latitud
         if (latitude < -90 || latitude > 90) {
-            return new Response("Latitude must be in range [-90, 90]", Status.BAD_REQUEST);
+            Response b=new Response("Latitude must be in range [-90, 90]", Status.BAD_REQUEST);
+            return b.clone();
         }
         if (!hasMaxFourDecimals(latitude)) {
-            return new Response("Latitude must have at most 4 decimal places", Status.BAD_REQUEST);
+            Response b= new Response("Latitude must have at most 4 decimal places", Status.BAD_REQUEST);
+            return b.clone();
         }
 
         // validar longitud
         if (longitude < -180 || longitude > 180) {
-            return new Response("Longitude must be in range [-180, 180]", Status.BAD_REQUEST);
+            Response b= new Response("Longitude must be in range [-180, 180]", Status.BAD_REQUEST);
+            return b.clone();
         }
         if (!hasMaxFourDecimals(longitude)) {
-            return new Response("Longitude must have at most 4 decimal places", Status.BAD_REQUEST);
+            Response b = new Response("Longitude must have at most 4 decimal places", Status.BAD_REQUEST);
+            return b.clone();
         }
 
        
         
-
-        return new Response("Location created successfully", Status.CREATED);
+        Response b= new Response("Location created successfully", Status.CREATED);
+        return b.clone();
     } catch (Exception ex) {
-        return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+        Response b = new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+        return b.clone();
     }
 }
 

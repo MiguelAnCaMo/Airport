@@ -97,9 +97,11 @@ public class FlightController {
 
         }
         if (found) {
-           return new Response("Passenger added to flight ", Status.OK);
+           Response b=new Response("Passenger added to flight ", Status.OK);
+            return b.clone();
         }
-         return new Response("Passenger id not found ", Status.NOT_FOUND);
+        Response b =new Response("Passenger id not found ", Status.NOT_FOUND); 
+        return b.clone();
     }
 
     //devuelve un modelo para el comboBox de flights que esta en la sección Add to flight
@@ -111,16 +113,10 @@ public class FlightController {
         return model;
     }
 
-    public void delayFlight(String flightId, int hours, int minutes) {
-
-        for (Flight f : fs.getFlights()) {
-            if (flightId.equals(f.getId())) {
-                f.setHoursDurationArrival(hours);
-                f.setMinutesDurationArrival(minutes);
-                break;
-            }
-        }
-    }
+//    public Response delayFlight(int hours, int minutes) {
+//        f.
+//        
+//    }
 
     public Response registerFlight(String id, String planeId, String departureLocationId, String scaleLocationId,
             String arrivalLocationId, LocalDateTime departureDate,
@@ -130,30 +126,35 @@ public class FlightController {
             // Validación de campos obligatorios
             if (id == null || id.isEmpty() || planeId == null || departureLocationId == null
                     || arrivalLocationId == null || departureDate == null) {
-                return new Response("No field should be null or empty", Status.BAD_REQUEST);
+                Response base = new Response("No field should be null or empty", Status.BAD_REQUEST);
+                return base.clone();
             }
 
             // Validación de ID único
             for (Flight f : fs.getFlights()) {
                 if (f.getId().equals(id)) {
-                    return new Response("Flight ID already exists", Status.BAD_REQUEST);
+                    Response base =new Response("Flight ID already exists", Status.BAD_REQUEST);
+                    return base.clone();
                 }
             }
 
             // Validación de fecha de salida (no debe ser en el pasado)
             if (departureDate.isBefore(LocalDateTime.now())) {
-                return new Response("Departure date must be in the future", Status.BAD_REQUEST);
+                Response base = new Response("Departure date must be in the future", Status.BAD_REQUEST);
+                return base.clone();
             }
 
             // Validación de duración (vuelo)
             if (hoursDurationArrival < 0 || minutesDurationArrival < 0 || (hoursDurationArrival == 0 && minutesDurationArrival == 0)) {
-                return new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
+               Response base = new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
+                return base.clone();
             }
 
             // Validación de duración (escala)
             if ((hoursDurationScale < 0 || minutesDurationScale < 0)
                     || (hoursDurationScale == 0 && minutesDurationScale == 0 && scaleLocationId != null)) {
-                return new Response("Scale duration must be greater than 00:00 if scale location is provided", Status.BAD_REQUEST);
+                Response base = new Response("Scale duration must be greater than 00:00 if scale location is provided", Status.BAD_REQUEST);
+                return base.clone();
             }
 
             // Crear y registrar vuelo
@@ -161,10 +162,11 @@ public class FlightController {
                     departureDate, hoursDurationArrival, minutesDurationArrival,
                     hoursDurationScale, minutesDurationScale);
             fs.getFlights().add(newFlight);
-
-            return new Response("Flight created successfully", Status.CREATED);
+            Response base = new Response("Flight created successfully", Status.CREATED);
+            return base.clone();
         } catch (Exception ex) {
-            return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+            Response base = new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+            return base.clone();
         }
     }
 
