@@ -1468,7 +1468,7 @@ public class AirportFrame extends javax.swing.JFrame {
         Response res=passengerC.registerPassenger(id, firstname, lastname, day, month, year, phoneCode, phone, country);
         if (res.getStatus()==Status.CREATED) {
              passengerC.createPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
-              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger created successfully", JOptionPane.OK_OPTION);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger created successfully", JOptionPane.INFORMATION_MESSAGE);
               passengerRegistrationID.setText("");
               passengerRegistrationFirstName.setText("");
               passengerRegistrationLastName.setText("");
@@ -1498,7 +1498,7 @@ public class AirportFrame extends javax.swing.JFrame {
         Response res=aC.registerAirplane(id, brand, model, maxCapacity, airline);
         if (res.getStatus()==Status.CREATED) {
              aC.createPlane(id, brand, model, maxCapacity, airline);
-              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.OK_OPTION);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.INFORMATION_MESSAGE);
               airplaneRegistrationID.setText("");
               airplaneRegistrationBrand.setText("");
               airplaneRegistrationModel.setText("");
@@ -1526,7 +1526,7 @@ public class AirportFrame extends javax.swing.JFrame {
          Response res=lc.registerLocation(id, name, city, country,latitude,longitude);
         if (res.getStatus()==Status.CREATED) {
              lc.createLocation(id, name, city, country, latitude, longitude);
-              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.OK_OPTION);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: AirPlane created successfully", JOptionPane.INFORMATION_MESSAGE);
               locationRegistrationID.setText("");
               locationRegistrationName.setText("");
               locationRegistrationAirportName.setText("");
@@ -1564,7 +1564,7 @@ public class AirportFrame extends javax.swing.JFrame {
         if (res.getStatus()==Status.CREATED) {
               
             fc.createFlight(id, planeId, departureLocationId, arrivalLocationId, departureDate, hoursDurationsArrival, minutesDurationsArrival);
-              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: flight created successfully", JOptionPane.OK_OPTION);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: flight created successfully", JOptionPane.INFORMATION_MESSAGE);
               flightRegistrationID.setText("");
               flightRegistrationComboBoxPlane.setSelectedIndex(0);
               flightRegistrationComboBoxDepartureLocation.setSelectedIndex(0);
@@ -1592,7 +1592,7 @@ public class AirportFrame extends javax.swing.JFrame {
         Response res= pc.modifyInfo(id, firstname, lastname, day, month, year, phoneCode, phone, country);
         if (res.getStatus()==Status.OK) {
               
-              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.OK_OPTION);
+              JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.INFORMATION_MESSAGE);
               flightRegistrationID.setText("");
               flightRegistrationComboBoxPlane.setSelectedIndex(0);
               flightRegistrationComboBoxDepartureLocation.setSelectedIndex(0);
@@ -1607,8 +1607,16 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String flightId = addToFlightFlightComboBox.getItemAt(addToFlightFlightComboBox.getSelectedIndex());
-
-
+        int passengerIdSearch=Integer.parseInt(addToFlightID.getText());
+        Response res=fc.addPassengerToFlight(flightId, passengerIdSearch);
+        if (res.getStatus()==Status.OK) {
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.INFORMATION_MESSAGE);
+            addToFlightID.setText("");
+            addToFlightFlightComboBox.setSelectedIndex(0);
+        }else{
+            JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not added correctly", JOptionPane.ERROR_MESSAGE);
+        }
+         
     }//GEN-LAST:event_addToFlightAddActionPerformed
 
     private void delayFlightDelayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delayFlightDelayButtonActionPerformed
