@@ -11,8 +11,6 @@ import controller.utils.Response;
 import controller.utils.Status;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import model.Passenger;
 
 /**
  *
@@ -24,9 +22,9 @@ public class AirportFrame extends javax.swing.JFrame {
      * Creates new form AirportFrame
      */
     private int x, y;
-    LocationController lc = new LocationController();
-    AirplaneController ac = new AirplaneController();
-    PassengerController pc = new PassengerController();
+//    LocationController lc = new LocationController();
+//    AirplaneController ac = new AirplaneController();
+//    PassengerController pc = new PassengerController();
     FlightController fc = new FlightController();
 
     public AirportFrame() throws IOException {
@@ -1613,7 +1611,7 @@ public class AirportFrame extends javax.swing.JFrame {
         Response res = fc.addPassengerToFlight(flightId, passengerIdSearch);
         if (res.getStatus()==Status.OK) {
             JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.INFORMATION_MESSAGE);
-            addToFlightFlightComboBox.setSelectedIndex(0);
+            //addToFlightFlightComboBox.setSelectedIndex(0);
         }else{
             JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not added correctly", JOptionPane.ERROR_MESSAGE);
         }

@@ -18,7 +18,7 @@ import org.json.*;
  * @author migue
  */
 public class JsonFlight {
-
+    //funcion para llenar las listas con objetos de tipo Flight
     public static ArrayList<Flight> readFlights(String path) throws IOException {
 
         String content = Files.readString(Paths.get(path), StandardCharsets.UTF_8);

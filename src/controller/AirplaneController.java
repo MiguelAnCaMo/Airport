@@ -28,7 +28,7 @@ public class AirplaneController {
         
     }
     
-    //esto crea un avion
+    //esta funcion crea un avion
     public void createPlane(String id, String brand, String model, int maxCapacity, String Airline) {
         Plane plane = new Plane(id, brand, model, maxCapacity, Airline);
         as.getPlanes().add(plane); 
@@ -64,6 +64,8 @@ public class AirplaneController {
         }
         return model;
     }
+    
+    // funcion para registrar un Plane, si se puede crear, se usara el metodo que esta más arríba llamado createPlane
     public Response registerAirplane(String id, String brand, String model, 
                                  int maxCapacity, String airline) {
     try {
@@ -96,10 +98,9 @@ public class AirplaneController {
             return b.clone();
         }
 
-      
-      
         Response b= new Response("Airplane created successfully", Status.CREATED);
         return b.clone();
+        
     } catch (Exception ex) {
         Response b= new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         return b.clone();

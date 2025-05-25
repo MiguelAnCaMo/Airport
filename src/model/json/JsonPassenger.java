@@ -14,10 +14,7 @@ import org.json.*;
  */
 public class JsonPassenger {
 
-    public JsonPassenger() {
-        
-    }
-   
+    //funcion para llenar las listas con objetos de tipo Passenger
     public static ArrayList<Passenger> readPassengers(String path) throws IOException {
         String content = Files.readString(Paths.get(path), StandardCharsets.UTF_8);
         JSONArray array  = new JSONArray(content);

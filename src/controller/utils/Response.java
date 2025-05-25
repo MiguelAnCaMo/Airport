@@ -32,6 +32,7 @@ public class Response implements Cloneable{
     public Object getObject() {
         return object;
     }
+    //haciendo uso del patrón de diseño Prototype 
     @Override
     public Response clone() {
         try {

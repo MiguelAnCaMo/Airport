@@ -25,7 +25,7 @@ public class LocationController {
     }
     
 
-    
+    // crea un location
     public Location createLocation(String airportID, String airportName, String City, String Country,double latitude, double longitude) {
         Location location = new Location(airportID, airportName, airportID, airportName, 0, 0);
         ls.getLocations().add(location);
@@ -35,6 +35,7 @@ public class LocationController {
     public LocationController() {
     }
     
+    // devuelve un Location dado un id
     public Location getLocationByID(String id) {
         ArrayList <Location> locations = ls.getLocations();
         for (Location location : locations) {
@@ -45,7 +46,7 @@ public class LocationController {
         return new Location("NA", "NA", "NA", "NA", 0, 0);
     }
     
-    
+    // devuelve un modelo para ponerlo en el Jtable de Locations
     public DefaultTableModel toLocationsJList() {
         String[] columnas = {"Airport ID", "Airport Name", "City", "Contry"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
@@ -62,12 +63,13 @@ public class LocationController {
         }
         return model;
     }
-    //metodo auxiliar
+    
+    //metodo auxiliar para conocer si tiene 4 decimales
     private boolean hasMaxFourDecimals(double value) {
     String[] parts = String.valueOf(value).split("\\.");
     return parts.length < 2 || parts[1].length() <= 4;
 }
-
+   // metodo que valida si se puede registrar un Location, si se puede se usara el metodo llamado createLocation que esta arriba
    public Response registerLocation(String airportID, String airportName, String city, String country,
                                  double latitude, double longitude) {
     try {
@@ -115,8 +117,6 @@ public class LocationController {
             return b.clone();
         }
 
-       
-        
         Response b= new Response("Location created successfully", Status.CREATED);
         return b.clone();
     } catch (Exception ex) {

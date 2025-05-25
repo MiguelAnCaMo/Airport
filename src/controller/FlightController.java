@@ -3,18 +3,13 @@ package controller;
 import controller.utils.Response;
 import controller.utils.Status;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.Flight;
-import model.Location;
 import model.Passenger;
-import model.Plane;
 import model.Storage.FlightStorage;
-import model.Storage.LocationStorage;
-import model.Storage.MyFlightsStorage;
 import model.Storage.PassengerStorage;
 import view.AirportFrame;
 
@@ -25,21 +20,16 @@ import view.AirportFrame;
 public class FlightController {
 
     private static FlightStorage fs;
-    private static LocationStorage ls;
     AirplaneController ac = new AirplaneController();
     LocationController lc = new LocationController();
     private static AirportFrame airportFrame;
     private static PassengerStorage ps;
-    private static MyFlightsStorage myFs;
-    PassengerController pc = new PassengerController();
 
     //dos contructores, uno para la carga del .json y el otro para agregar datos con la interfaz
     public FlightController(String a, AirportFrame af) throws IOException {
         fs = new FlightStorage();
-        ls = new LocationStorage();
         airportFrame = af;
         ps = new PassengerStorage();
-        myFs = new MyFlightsStorage();
     }
 
     public FlightController() {
@@ -53,11 +43,13 @@ public class FlightController {
         fs.getFlights().add(flight);
         return flight;
     }
-
+    
+    // enviar la lista de flights
     public static ArrayList<Flight> sendFlights() {
         return fs.getFlights();
     }
-
+    
+    // devuelve un modelo para ponerlo en la lista de flights
     public DefaultTableModel toFlightsJList() {
         String[] columnas = {"ID", "Departure Airport ID", "Arrival Airport ID", "Scale airport", "Departure Date", "Arrival Date", "Plane ID", "Number Passengers"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
@@ -83,7 +75,7 @@ public class FlightController {
 
         return model;
     }
-
+    //añadir un passenger a un flight
     public Response addPassengerToFlight(String flightId, int passengerIdSearch) {
         boolean found = false;
         for (Passenger p : ps.getPassengers()) {
@@ -108,6 +100,7 @@ public class FlightController {
         return b.clone();
     }
     
+    //obtener Response dados los flights de un passenger
     public Response getPassengerFlightsResponse(String idSearch) {
       for (Passenger p : ps.getPassengers()) {
           if (String.valueOf(p.getId()).equals(idSearch)) {
@@ -121,6 +114,7 @@ public class FlightController {
       return r.clone();   
     }
     
+    //obtener los flights dado un passenger 
     public DefaultTableModel getPassengerFlights(String idSearch) {
         String[] columnas = {"ID", "Departure Date", "Arrival Date"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
@@ -139,7 +133,7 @@ public class FlightController {
     }
     
     //devuelve un modelo para el comboBox de flights que esta en la sección Add to flight
-    public static DefaultComboBoxModel<String> getFlightModel() {
+    public DefaultComboBoxModel<String> getFlightModel() {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         for (Flight f : fs.getFlights()) {
             model.addElement(f.getId());
@@ -147,6 +141,7 @@ public class FlightController {
         return model;
     }
     
+    // devuelve modelo que contiene los ids de los passengers para ponelo en el comboBox inicial
     public DefaultComboBoxModel<String> getUserModel() {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         for (Passenger p : ps.getPassengers()) {
@@ -155,6 +150,7 @@ public class FlightController {
         return model;
     }
     
+    // funcion para retrasar un vuelo
     public Response delayFlight(String flightsId, int hours, int minutes) {
         for (Flight f : fs.getFlights()) {
             if (flightsId.equals(f.getId())) {
@@ -166,7 +162,8 @@ public class FlightController {
         Response base = new Response("flight not found", Status.BAD_REQUEST);
         return base.clone();
     }
-
+    
+    // funcion para crear un nuevo Flight
     public Response registerFlight(String id, String planeId, String departureLocationId, String scaleLocationId,
             String arrivalLocationId, LocalDateTime departureDate,
             int hoursDurationArrival, int minutesDurationArrival,
@@ -187,13 +184,13 @@ public class FlightController {
                 }
             }
 
-            // Validación de fecha de salida (no debe ser en el pasado)
+            // Validación de fecha de salida, no estar en el pasado
             if (departureDate.isBefore(LocalDateTime.now())) {
                 Response base = new Response("Departure date must be in the future", Status.BAD_REQUEST);
                 return base.clone();
             }
 
-            // Validación de duración (vuelo)
+            // Validación de duración de vuelo
             if (hoursDurationArrival < 0 || minutesDurationArrival < 0 || (hoursDurationArrival == 0 && minutesDurationArrival == 0)) {
                 Response base = new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
                 return base.clone();

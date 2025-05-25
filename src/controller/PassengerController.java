@@ -32,7 +32,7 @@ public class PassengerController {
         Passenger passenger = new Passenger(id, firstname, lastname, birthDate, countryPhoneCode, phone, country);
         ps.getPassengers().add(passenger);
     } 
-
+    // envia passengers
     public static ArrayList<Passenger> sendPassengers() {
         return ps.getPassengers();
     }
@@ -72,6 +72,7 @@ public class PassengerController {
         }
         return model;
     }
+    // metodo que verifica si se puede registrar un passenger, si es el caso se usa una funcion llamada createPassenger que esta arriba
     public Response registerPassenger(long id, String firstname, String lastname,
                                   int day, int month, int year,
                                   int phoneCode, long phone, String country) {
@@ -130,6 +131,8 @@ public class PassengerController {
         return b.clone();
     }
 }
+    
+// metodo para modificar la información de un passenger si se encuentra el id ingresado
 public Response modifyInfo(long id, String firstname, String lastname,
                                   int day, int month, int year,
                                   int phoneCode, long phone, String country){

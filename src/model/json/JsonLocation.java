@@ -13,7 +13,7 @@ import org.json.*;
  * @author migue
  */
 public class JsonLocation {
-
+    //funcion para llenar las listas con objetos de tipo Location
     public static ArrayList<Location> readLocations(String path) throws IOException {
         String content = Files.readString(Paths.get(path), StandardCharsets.UTF_8);
         JSONArray array = new JSONArray(content);
