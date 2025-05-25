@@ -49,7 +49,7 @@ public class AirplaneController {
     
     //funcion que devuelve un modelo para poner a la lista de aviones en la interfaz
     public DefaultTableModel toPlanesJList() {
-        String[] columnas = {"ID", "Model", "Model", "Max Capacity", "Airline", "Number Flights"};
+        String[] columnas = {"ID", "Brand", "Model", "Max Capacity", "Airline", "Number Flights"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0); //modelo para ser devuelto
         
         if (as.getPlanes().isEmpty()) {

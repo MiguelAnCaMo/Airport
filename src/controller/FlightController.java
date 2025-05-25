@@ -152,15 +152,24 @@ public class FlightController {
     }
     
     // funcion para retrasar un vuelo
-    public Response delayFlight(String flightsId, int hours, int minutes) {
+    public Response delayFlight(String flightsId, String hours, String minutes) {
+        if (hours.equals("Hour")||minutes.equals("Minute")) {
+            Response base = new Response("You must enter an hour and minute", Status.BAD_REQUEST);
+            return base.clone();
+            
+        }
+        
+        
+        int newhours = Integer.parseInt(hours);
+        int newmin=Integer.parseInt(minutes);
         for (Flight f : fs.getFlights()) {
             if (flightsId.equals(f.getId())) {
-                f.delay(hours, minutes);
-                Response b = new Response("flight delayed succesfully  ", Status.OK);
+                f.delay(newhours, newmin);
+                Response b = new Response("Flight delayed succesfully  ", Status.OK);
                 return b.clone();
             }
         }
-        Response base = new Response("flight not found", Status.BAD_REQUEST);
+        Response base = new Response("Flight not found", Status.BAD_REQUEST);
         return base.clone();
     }
     

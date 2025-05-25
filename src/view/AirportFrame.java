@@ -1622,8 +1622,8 @@ public class AirportFrame extends javax.swing.JFrame {
     private void delayFlightDelayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delayFlightDelayButtonActionPerformed
         
         String flightId = delayFlightIDComboBox.getItemAt(delayFlightIDComboBox.getSelectedIndex());
-        int hours = Integer.parseInt(delayFlightHour.getItemAt(delayFlightHour.getSelectedIndex()));
-        int minutes = Integer.parseInt(delayFlightMinute.getItemAt(delayFlightMinute.getSelectedIndex()));
+        String hours = delayFlightHour.getItemAt(delayFlightHour.getSelectedIndex());
+        String minutes = delayFlightMinute.getItemAt(delayFlightMinute.getSelectedIndex());
         Response res=fc.delayFlight(flightId, hours, minutes);
         if (res.getStatus()==Status.OK) {
             JOptionPane.showMessageDialog(null, res.getMessage(), "Success: flight delayed", JOptionPane.INFORMATION_MESSAGE);
