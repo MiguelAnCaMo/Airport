@@ -108,6 +108,18 @@ public class FlightController {
         return b.clone();
     }
     
+    public Response getPassengerFlightsResponse(String idSearch) {
+      for (Passenger p : ps.getPassengers()) {
+          if (String.valueOf(p.getId()).equals(idSearch)) {
+              if(p.getFlights().isEmpty()) {
+                 Response b = new Response("Passenger has no flights", Status.NOT_FOUND);
+                 return b.clone();
+              }   
+          }    
+        }  
+      Response r = new Response("Showing flights", Status.OK);
+      return r.clone();   
+    }
     
     public DefaultTableModel getPassengerFlights(String idSearch) {
         String[] columnas = {"ID", "Departure Date", "Arrival Date"};

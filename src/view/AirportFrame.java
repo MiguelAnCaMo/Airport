@@ -1613,7 +1613,6 @@ public class AirportFrame extends javax.swing.JFrame {
         Response res = fc.addPassengerToFlight(flightId, passengerIdSearch);
         if (res.getStatus()==Status.OK) {
             JOptionPane.showMessageDialog(null, res.getMessage(), "Success: passenger modified", JOptionPane.INFORMATION_MESSAGE);
-            addToFlightID.setText("");
             addToFlightFlightComboBox.setSelectedIndex(0);
         }else{
             JOptionPane.showMessageDialog(null, res.getMessage(), "Error: not added correctly", JOptionPane.ERROR_MESSAGE);
@@ -1639,8 +1638,13 @@ public class AirportFrame extends javax.swing.JFrame {
         
         String idCombobox = String.valueOf(userSelectComboBox.getSelectedItem());
         
-        jTableMyFlights.setModel(fc.getPassengerFlights(idCombobox));
-        
+        Response r = fc.getPassengerFlightsResponse(idCombobox);
+         if (r.getStatus() == Status.OK) {
+             jTableMyFlights.setModel(fc.getPassengerFlights(idCombobox));
+             JOptionPane.showMessageDialog(null, r.getMessage(), "Passenger flights", JOptionPane.INFORMATION_MESSAGE);
+         } else {
+             JOptionPane.showMessageDialog(null, r.getMessage(), "Passenger flights", JOptionPane.ERROR_MESSAGE);
+         }
         
     }//GEN-LAST:event_showMyFlightsBotonRefreshActionPerformed
 
