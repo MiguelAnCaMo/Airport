@@ -26,7 +26,7 @@ public class LocationController {
     
 
     // crea un location
-    public Location createLocation(String airportID, String airportName, String City, String Country,double latitude, double longitude) {
+    public Location createLocation(String airportID, String airportName, String City, String Country,String latitude, String longitude) {
         Location location = new Location(airportID, airportName, airportID, airportName, 0, 0);
         ls.getLocations().add(location);
         return location;
@@ -71,13 +71,13 @@ public class LocationController {
 }
    // metodo que valida si se puede registrar un Location, si se puede se usara el metodo llamado createLocation que esta arriba
    public Response registerLocation(String airportID, String airportName, String city, String country,
-                                 double latitude, double longitude) {
+                                 String latitude, String longitude) {
     try {
         // verificacion si los campos estan vacios
         if (airportID == null || airportID.isEmpty() ||
             airportName == null || airportName.isEmpty() ||
             city == null || city.isEmpty() ||
-            country == null || country.isEmpty()) {
+            country == null || country.isEmpty() || latitude == null || longitude == null) {
             Response b = new Response("No text field should be empty", Status.BAD_REQUEST);
             return b.clone();
         }
@@ -96,23 +96,26 @@ public class LocationController {
                 return b.clone();
             }
         }
-
+        
+        int newlalitude = Integer.parseInt(latitude);
+        int newlongitude = Integer.parseInt(longitude);
+        
         // validar latitud
-        if (latitude < -90 || latitude > 90) {
+        if (newlalitude < -90 || newlalitude > 90) {
             Response b=new Response("Latitude must be in range [-90, 90]", Status.BAD_REQUEST);
             return b.clone();
         }
-        if (!hasMaxFourDecimals(latitude)) {
+        if (!hasMaxFourDecimals(newlalitude)) {
             Response b= new Response("Latitude must have at most 4 decimal places", Status.BAD_REQUEST);
             return b.clone();
         }
 
         // validar longitud
-        if (longitude < -180 || longitude > 180) {
+        if (newlongitude < -180 || newlongitude > 180) {
             Response b= new Response("Longitude must be in range [-180, 180]", Status.BAD_REQUEST);
             return b.clone();
         }
-        if (!hasMaxFourDecimals(longitude)) {
+        if (!hasMaxFourDecimals(newlongitude)) {
             Response b = new Response("Longitude must have at most 4 decimal places", Status.BAD_REQUEST);
             return b.clone();
         }

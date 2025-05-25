@@ -37,9 +37,10 @@ public class FlightController {
     }
 
     //buscará el avión y las ubicaciones por el id para un vuelo
-    public Flight createFlight(String flightID, String planeID, String departureLocationId, String arrivalLocationId, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
+    public Flight createFlight(String flightID, String planeID, String departureLocationId, String arrivalLocationId, String year, String month, String day, String hour, String minutes, String hoursDurationArrival, String minutesDurationArrival) {
         //mega contructor para la creacion del vuelo 
-        Flight flight = new Flight(flightID, ac.getPlaneByID(flightID), lc.getLocationByID(departureLocationId), lc.getLocationByID(arrivalLocationId), departureDate, hoursDurationArrival, minutesDurationArrival);
+        LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minutes));
+        Flight flight = new Flight(flightID, ac.getPlaneByID(flightID), lc.getLocationByID(departureLocationId), lc.getLocationByID(arrivalLocationId), departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival));
         fs.getFlights().add(flight);
         return flight;
     }
@@ -165,17 +166,19 @@ public class FlightController {
     
     // funcion para crear un nuevo Flight
     public Response registerFlight(String id, String planeId, String departureLocationId, String scaleLocationId,
-            String arrivalLocationId, LocalDateTime departureDate,
-            int hoursDurationArrival, int minutesDurationArrival,
-            int hoursDurationScale, int minutesDurationScale) {
+            String arrivalLocationId, String year, String month, String day, String hour, String minutes,
+            String hoursDurationArrival, String minutesDurationArrival,
+            String hoursDurationScale, String minutesDurationScale) {
         try {
             // Validación de campos obligatorios
             if (id == null || id.isEmpty() || planeId == null || departureLocationId == null
-                    || arrivalLocationId == null || departureDate == null) {
+                    || arrivalLocationId == null || year == null || month == null || day == null || hour == null || minutes == null || hoursDurationArrival == null || minutesDurationArrival == null
+                    || hoursDurationScale == null || minutesDurationScale == null) {
                 Response base = new Response("No field should be null or empty", Status.BAD_REQUEST);
                 return base.clone();
             }
-
+            
+            LocalDateTime newdepartureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minutes)); 
             // Validación de ID único
             for (Flight f : fs.getFlights()) {
                 if (f.getId().equals(id)) {
@@ -184,29 +187,34 @@ public class FlightController {
                 }
             }
 
+            int newhoursDurationArrival = Integer.parseInt(hoursDurationArrival);
+            int newminutesDurationArrival = Integer.parseInt(minutesDurationArrival);
+            int newhoursDurationScale = Integer.parseInt(hoursDurationScale);
+            int newminutesDurationScale = Integer.parseInt(minutesDurationScale);
+            
             // Validación de fecha de salida, no estar en el pasado
-            if (departureDate.isBefore(LocalDateTime.now())) {
+            if (newdepartureDate.isBefore(LocalDateTime.now())) {
                 Response base = new Response("Departure date must be in the future", Status.BAD_REQUEST);
                 return base.clone();
             }
 
             // Validación de duración de vuelo
-            if (hoursDurationArrival < 0 || minutesDurationArrival < 0 || (hoursDurationArrival == 0 && minutesDurationArrival == 0)) {
+            if (newhoursDurationArrival < 0 || newminutesDurationArrival < 0 || (newhoursDurationArrival == 0 && newminutesDurationArrival == 0)) {
                 Response base = new Response("Flight duration must be greater than 00:00", Status.BAD_REQUEST);
                 return base.clone();
             }
 
             // Validación de duración (escala)
-            if ((hoursDurationScale < 0 || minutesDurationScale < 0)
-                    || (hoursDurationScale == 0 && minutesDurationScale == 0 && scaleLocationId != null)) {
+            if ((newhoursDurationScale < 0 || newminutesDurationScale < 0)
+                    || (newhoursDurationScale == 0 && newminutesDurationScale == 0 && scaleLocationId != null)) {
                 Response base = new Response("Scale duration must be greater than 00:00 if scale location is provided", Status.BAD_REQUEST);
                 return base.clone();
             }
 
             // Crear y registrar vuelo
             Flight newFlight = new Flight(id, ac.getPlaneByID(planeId), lc.getLocationByID(departureLocationId), lc.getLocationByID(scaleLocationId), lc.getLocationByID(arrivalLocationId),
-                    departureDate, hoursDurationArrival, minutesDurationArrival,
-                    hoursDurationScale, minutesDurationScale);
+                    newdepartureDate, newhoursDurationArrival, newminutesDurationArrival,
+                    newhoursDurationScale, newminutesDurationScale);
             fs.getFlights().add(newFlight);
             Response base = new Response("Flight created successfully", Status.CREATED);
             return base.clone();

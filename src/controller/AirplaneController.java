@@ -29,8 +29,8 @@ public class AirplaneController {
     }
     
     //esta funcion crea un avion
-    public void createPlane(String id, String brand, String model, int maxCapacity, String Airline) {
-        Plane plane = new Plane(id, brand, model, maxCapacity, Airline);
+    public void createPlane(String id, String brand, String model, String maxCapacity, String Airline) {
+        Plane plane = new Plane(id, brand, model, Integer.parseInt(maxCapacity), Airline);
         as.getPlanes().add(plane); 
     }
 
@@ -67,7 +67,7 @@ public class AirplaneController {
     
     // funcion para registrar un Plane, si se puede crear, se usara el metodo que esta más arríba llamado createPlane
     public Response registerAirplane(String id, String brand, String model, 
-                                 int maxCapacity, String airline) {
+                                 String maxCapacity, String airline) {
     try {
         // validación de campos de texto vacíos
         if (id == null || id.isEmpty() ||
@@ -91,9 +91,11 @@ public class AirplaneController {
                 return b.clone();
             }
         }
-
+        
+        int newmaxCapacity = Integer.parseInt(maxCapacity);
+        
         // validación de capacidad máxima
-        if (maxCapacity <= 0 || maxCapacity > 1000) {
+        if (newmaxCapacity <= 0 || newmaxCapacity > 1000) {
             Response b= new Response("Max capacity must be between 1 and 1000", Status.BAD_REQUEST);
             return b.clone();
         }

@@ -28,8 +28,12 @@ public class PassengerController {
         
     }
         //creando un passeger y agregandolo a la lista de passengers en storage
-    public void createPassenger (long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode, long phone, String country) {
-        Passenger passenger = new Passenger(id, firstname, lastname, birthDate, countryPhoneCode, phone, country);
+    public void createPassenger (String id, String firstname, String lastname, String year, String month, String day, String countryPhoneCode, String phone, String country) {
+        int newYear = Integer.parseInt(year);
+        int newMonth = Integer.parseInt(month);
+        int newDay = Integer.parseInt(day);
+        LocalDate birthDate = LocalDate.of(newYear, newMonth, newDay);
+        Passenger passenger = new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(countryPhoneCode), Integer.parseInt(phone), country);
         ps.getPassengers().add(passenger);
     } 
     // envia passengers
@@ -73,9 +77,9 @@ public class PassengerController {
         return model;
     }
     // metodo que verifica si se puede registrar un passenger, si es el caso se usa una funcion llamada createPassenger que esta arriba
-    public Response registerPassenger(long id, String firstname, String lastname,
-                                  int day, int month, int year,
-                                  int phoneCode, long phone, String country) {
+    public Response registerPassenger(String id, String firstname, String lastname,
+                                  String day, String month, String year,
+                                  String phoneCode, String phone, String country) {
     try {
         // Validación: campos de texto vacíos
         if (firstname == null || firstname.isEmpty() ||
@@ -84,40 +88,47 @@ public class PassengerController {
             Response b= new Response("No text field should be empty", Status.BAD_REQUEST);
             return b.clone();
         }
-
+        
+        int newId = Integer.parseInt(id);
+        int newphoneCode = Integer.parseInt(phoneCode);
+        long newphone = Long.parseLong(phone);
+        int newyear = Integer.parseInt(year);
+        int newmonth = Integer.parseInt(month);
+        int newday = Integer.parseInt(day);
+        
         // Validación de ID
-        if (id < 0 || String.valueOf(id).length() > 15) {
+        if (newId < 0 || String.valueOf(id).length() > 15) {
             Response b=new Response("ID must be at least and at most 15 digits", Status.BAD_REQUEST);
             return b.clone();
         }
 
         // Verificación de duplicado
         for (Passenger p : ps.getPassengers()) {
-            if (p.getId() == id) {
+            if (p.getId() == newId) {
                 Response b = new Response("Passenger ID already exists", Status.BAD_REQUEST);
                 return b.clone();
             }
         }
 
         // Validación del código de teléfono
-        if (phoneCode < 0 || String.valueOf(phoneCode).length() > 3) {
+        if (newphoneCode < 0 || String.valueOf(phoneCode).length() > 3) {
             Response b= new Response("Phone code must be at least 0 and at most 3 digits", Status.BAD_REQUEST);
             return b.clone();
         }
 
         // Validación del número de teléfono
-        if (phone < 0 || String.valueOf(phone).length() > 11) {
+        if (newphone < 0 || String.valueOf(phone).length() > 11) {
             Response b = new Response("Phone number must be at least 0 and less than 11 digits", Status.BAD_REQUEST);
             return b.clone();
         }
 
         // Validación de la fecha de nacimiento
         try {
-            if (year < 1910 || year > 2025) {
+            if (newyear < 1910 || newyear > 2025) {
                 Response b=new Response("Invalid birth year", Status.BAD_REQUEST);
                 return b.clone();
             }
-            LocalDate birthDate = LocalDate.of(year, month, day); // Esto lanza excepción si la fecha es inválida
+            LocalDate birthDate = LocalDate.of(newyear, newmonth, newday); // Esto lanza excepción si la fecha es inválida
         } catch (DateTimeException e) {
             Response b =new Response("Invalid birthdate", Status.BAD_REQUEST);
             return b.clone();
@@ -133,19 +144,27 @@ public class PassengerController {
 }
     
 // metodo para modificar la información de un passenger si se encuentra el id ingresado
-public Response modifyInfo(long id, String firstname, String lastname,
-                                  int day, int month, int year,
-                                  int phoneCode, long phone, String country){
+public Response modifyInfo(String id, String firstname, String lastname,
+                                  String day, String month, String year,
+                                  String phoneCode, String phone, String country){
+    
+   if (firstname == null || firstname.isEmpty() ||
+            lastname == null || lastname.isEmpty() ||
+            country == null || country.isEmpty()) {
+            Response b= new Response("No text field should be empty", Status.BAD_REQUEST);
+            return b.clone();
+        }
+   
    boolean founded = false;
          for (Passenger passenger : ps.getPassengers()) {
             
-        if (id == passenger.getId()) {
+        if (Integer.parseInt(id) == passenger.getId()) {
                 passenger.setFirstname(firstname);
                 passenger.setLastname(lastname);
-                LocalDate birthDate = LocalDate.of(year, month, day);
+                LocalDate birthDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
                 passenger.setBirthDate(birthDate);
-                passenger.setCountryPhoneCode(phoneCode);
-                passenger.setPhone(phone);
+                passenger.setCountryPhoneCode(Integer.parseInt(phoneCode));
+                passenger.setPhone(Integer.parseInt(phone));
                 passenger.setCountry(country);
                founded=true;
                 break;
